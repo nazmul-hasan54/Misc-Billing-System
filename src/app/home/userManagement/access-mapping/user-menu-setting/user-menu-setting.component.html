@@ -1,0 +1,91 @@
+
+<div fxLayout="column" fxLayoutGap="40px" class="mb-3">
+    <ngx-generic-header title="Access Mapping"></ngx-generic-header>
+</div>
+
+
+<nb-card size="large" style="max-height: 1000px;">
+  <nb-card-header>
+
+  </nb-card-header>
+    <nb-card-body>
+      <form (submit)="saveUTM(menuItemList)">
+        <div class="row m-1 p-1">
+          <div class="col-sm-3">
+            <label class="col-form-label float-right">User: <span></span></label>
+          </div>
+
+          <div class="col-sm-6">
+            <nb-select *ngIf="this.roleName == 'Admin'" fullWidth [placeholder]="'--- Select User ---'" (selectedChange)="changeUser($event)">
+              <nb-option *ngFor="let item of userDDList" [value]="item.key">{{item.value}}</nb-option>
+            </nb-select>
+            <nb-select *ngIf="this.roleName != 'Admin'" fullWidth [placeholder]="'--- Select User ---'" (selectedChange)="changeUser($event)">
+              <nb-option *ngFor="let item of userDDListPriority" [value]="item.key">{{item.value}}</nb-option>
+            </nb-select>
+          </div>
+        </div>
+     
+       
+      <section class="example-section" *ngFor="let menuItem of menuItemList; let i = index" >
+      <span (click)="onIconChange(i)"  class="fas fa-plus-circle" [id]="i"  data-toggle="collapse" [attr.href]="'#module'+i"  aria-expanded="false" aria-controls="collapseExample"></span>
+        <span class="example-list-section">
+            <mat-checkbox  class="example-margin" [(ngModel)]="menuItem.isActive" #values
+                (change)="allChildCheckUpdate(menuItem.itemId,values.checked)"
+                [ngModelOptions]="{standalone: true}">
+                {{menuItem.itemName}}
+            </mat-checkbox>
+            <hr class="hrStyle">
+        </span>
+      
+        <span class="example-list-section collapse" [id]="'module'+i">
+            <ul>
+                <li *ngFor="let menuChild of menuItem.children" class="listOfChildMenu">
+                    <mat-checkbox [(ngModel)]="menuChild.isActive" #value
+                        [ngModelOptions]="{standalone: true}"
+                        (change)="ParentCheckUpdateForAllChild(menuItem.itemId)">
+                        {{menuChild.itemName}}
+                    </mat-checkbox>
+                    <div class="ml-auto float-right">
+                      <mat-checkbox class="mr-3" [(ngModel)]="menuChild.isCreated" [value]="0" [disabled]='menuChild.isActive != true'
+                        (change)="userMenuAccessCreate(menuItem.itemId,$event,menuChild.itemId)" [ngModelOptions]="{standalone: true}">
+                        Create
+                      </mat-checkbox>
+                      <mat-checkbox class="mr-3" [(ngModel)]="menuChild.isEdited" [value]="0" [disabled]='menuChild.isActive != true'
+                        (change)="userMenuAccessEdit(menuItem.itemId,$event,menuChild.itemId)" [ngModelOptions]="{standalone: true}">
+                        Edit
+                      </mat-checkbox>
+                      <mat-checkbox [(ngModel)]="menuChild.isDeleted" [value]="0" [disabled]='menuChild.isActive != true'
+                        (change)="userMenuAccessDelete(menuItem.itemId,$event,menuChild.itemId)" [ngModelOptions]="{standalone: true}">
+                        Delete
+                      </mat-checkbox>
+                    
+                    
+                    </div>
+                </li>
+            </ul>
+        </span>
+    </section>
+      </form>
+    </nb-card-body>
+    <div class="row m-2 p-1 ml-0">
+        <div class="col-sm-3">
+          <div >
+            <!-- <button nbButton type="submit" *ngIf="menuItemList.length>0">
+                <nb-icon icon="save-outline"  status='info'></nb-icon>Save
+            </button> -->
+            <button  nbButton type="submit" status="info" *ngIf="menuItemList.length>0" (click)="onSaveUTM()">
+              <nb-icon icon="save-outline" ></nb-icon>Save
+          </button>
+        </div>
+        </div>
+
+        <div class="col-sm-6">
+         
+            <div class="col-sm-2">
+         
+            </div>
+           
+        </div>
+      </div>
+   
+</nb-card>

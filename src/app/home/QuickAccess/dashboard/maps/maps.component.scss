@@ -1,0 +1,313 @@
+.main-div {
+    margin: auto;
+   background-color: #fafafa;
+  }
+  
+  .map {
+    width: 1240px;
+    height: 790px;
+    padding: 20px;
+  }
+  
+  .mat-icon {
+    font-size: 50px;
+  }
+  .iconW {
+    color: #6f00c9;
+    position: absolute;
+    left: 27%;
+    right: 27%;
+    top: 28%;
+    bottom: 28%;
+  }
+  .iconN {
+    position: absolute;
+    top: 10%;
+    bottom: 10%;
+    left: 41.3%;
+    right: 41.3%;
+    color: #5e2d86;
+  }
+  .iconE {
+    color: #0065c2;
+    position: absolute;
+    left: 63.5%;
+    right: 63.5%;
+    top: 31%;
+    bottom: 31%;
+  }
+  .iconC {
+    position: absolute;
+    left: 46%;
+    right: 46%;
+    top: 56%;
+    bottom: 56%;
+    color: #00ab11;
+  }
+  
+  /* with out mouse over */
+  table {
+    width: 30.5%;
+  }
+  
+  .mat-header-cell {
+    font-size: 16px;
+    font-weight: 497;
+  }
+  
+  tr.mat-header-row {
+    height: 48px !important;
+  }
+  .tableN {
+    position: absolute;
+    top: 0.5%;
+    left: 46.5%;
+  }
+  .tableW {
+    position: absolute;
+    top: 39.5%;
+    left: 13.5%;
+  }
+  
+  .tableC {
+    position: absolute;
+    top: 70%;
+    left: 33%;
+  }
+  
+  .tableE {
+    position: absolute;
+    top: 43.5%;
+    left: 56%;
+  }
+  
+  .styleN {
+    background-color: #5e2d86e5;
+    color: white;
+  }
+  .styleW {
+    background-color: #6f00c9;
+    color: white;
+  }
+  .styleC {
+    background-color: #00ab11;
+    color: white;
+  }
+  .styleE {
+    background-color: #0065c2;
+    color: white;
+  }
+  
+  .tableCursor{
+    cursor: pointer;
+  }
+  
+  
+  @media screen and (max-width: 599px) {
+  
+    table {
+      th,
+      td {
+        width: 4%;
+      }
+    }
+    .main-div{
+      padding-bottom: 32px;
+    }
+  
+    .map{
+      display: none;
+    }
+  
+    .tableN{
+      position: relative;
+      margin-bottom: 23.5px;
+      left: 0%;
+    }
+    .tableW{
+    position: relative;
+     margin-bottom: 23.5px;
+     left: 0%;
+    }
+  
+    .tableC{
+      position: relative;
+       margin-bottom: 23.5px;
+       left: 0%;
+    }
+    .tableE{
+      position: relative;
+       margin-bottom: 23.5px;
+       left: 0%;
+    }
+    
+  .iconN{
+      display: none;
+    }
+    .iconW{
+       display: none;
+    }
+    .iconE{
+       display: none;
+    }
+    .iconC{
+   display: none;
+    }
+  
+    .tableHeader{
+          background: rgba(189, 255, 239, 0.3);
+      color: #5e2d86;
+      height: 48px;
+      width: 100%;
+      display: flex;
+      align-content: center;
+      justify-content: center;
+      align-items: center;
+      font-size: 16px;
+      font-weight: 500;
+    }
+  
+  
+  }
+  @media screen and (min-width: 600px) and (max-width: 959px) {
+    table {
+      th,
+      td {
+        width: 4%;
+      }
+    }
+    .main-div{
+      padding-bottom: 32px;
+    }
+  
+    .map{
+      display: none;
+    }
+  
+    .tableN{
+      position: relative;
+      margin-bottom: 23.5px;
+      left: 0%;
+    }
+    .tableW{
+    position: relative;
+     margin-bottom: 23.5px;
+     left: 0%;
+    }
+  
+    .tableC{
+      position: relative;
+       margin-bottom: 23.5px;
+       left: 0%;
+    }
+    .tableE{
+      position: relative;
+       margin-bottom: 23.5px;
+       left: 0%;
+    }
+    
+  .iconN{
+      display: none;
+    }
+    .iconW{
+       display: none;
+    }
+    .iconE{
+       display: none;
+    }
+    .iconC{
+   display: none;
+    }
+  
+    .tableHeader{
+          background: rgba(189, 255, 239, 0.3);
+      color: #5e2d86;
+      height: 48px;
+      width: 100%;
+      display: flex;
+      align-content: center;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      font-weight: 500;
+    }
+  
+  
+   
+  }
+  @media screen and (min-width: 960px) and (max-width: 1279px) {
+    table {
+      th,
+      td {
+       
+            padding: 7px 9px;
+      }
+    }
+  
+    .map{
+      width: 100%;
+      height: 100%;
+    }
+  
+    .iconN{
+      left: 38.3%;
+      top:9%
+    }
+    .iconW{
+      left: 21%;
+      top: 27%;
+    }
+    .iconE{
+      left: 65%;
+      top: 30%;
+    }
+    .iconC{
+      left:44%;
+      top:55%;
+    }
+  
+    .tableW{
+      left:11.5%;
+  
+    }
+    .tableC{
+      top: 72%;
+      left: 32%;
+    }
+    .tableE{
+      top: 42.5%;
+      left: 57%;
+    }
+  
+  }
+  
+  @media screen and (min-width: 1280px) and (max-width: 1919px) {
+    table {
+      th,
+      td {
+        padding: 7px 9px;
+      }
+    }
+    .iconN{
+      left: 38.5%;
+    }
+    .iconW{
+      left: 21.5%;
+    }
+    .iconE{
+      left: 66%;
+    }
+    .iconC{
+      left: 44.5%;
+    }
+  
+    .map{
+      width: 100%;
+      height: 100%;
+    }
+    .tableW{
+      left:11.5%;
+    }
+  }
+  
+  

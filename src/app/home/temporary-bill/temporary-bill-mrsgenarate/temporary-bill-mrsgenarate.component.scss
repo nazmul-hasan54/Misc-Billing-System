@@ -1,0 +1,106 @@
+.col-form-label {
+    color: black !important;
+    font-size: 14px;
+}
+
+.header-section {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.form-header-section {
+    width: 100%;
+    color: #2596be !important;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 18px;
+    padding-left: 15px;
+    font-family: revert;
+}
+
+.no-border {
+    border: 0;
+    box-shadow: none;
+    background-color: #ffffff;
+    /* You may want to include this as bootstrap applies these styles too */
+}
+
+.hr-vertical {
+    border-top: 2px solid rgb(0, 0, 0);
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+
+nb-icon {
+    font-size: 5rem;
+    cursor: pointer;
+}
+
+#file-input {
+    display: none;
+}
+
+.btnsave {
+    color: white;
+    font-weight: bold;
+    background-color: rgb(60, 210, 105);
+
+}
+
+.btnmrs {
+    color: white;
+    font-weight: bold;
+    background-color: rgb(140, 198, 63);
+
+}
+
+.btncalc {
+
+    color: white;
+    font-weight: bold;
+    background-color: rgb(0, 0, 255);
+
+
+}
+
+.btnprn {
+
+    color: white;
+    font-weight: bold;
+    background-color: rgb(41, 171, 226);
+
+}
+
+
+.tr1 {
+    text-align: center;
+    background-color: rgb(91, 155, 213);
+    color: white;
+    font-weight: bold;
+}
+
+.tr2 {
+    background-color: rgb(189, 214, 238);
+}
+
+.tr3 {
+    background-color: rgb(222, 234, 246);
+}
+
+label {
+    text-align: right !important;
+}

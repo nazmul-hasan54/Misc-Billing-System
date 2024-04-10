@@ -1,0 +1,87 @@
+<nb-card *ngIf="isTrue==false">
+    <nb-card-header>অবাঙ্গালী (বিহারী) ক্যাম্পের বকেয়া বিদ্যুৎ বিলের প্রতিবেদন (সংশোধিত)</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="form" (ngSubmit)="onReport()">
+            <!-- <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group row">
+                        <label for="customerType" class="lebel col-form-label col-sm-2">Report Date</label>
+                        <div class="col-sm-9">
+                            <input nbInput placeholder="Pick Date" [nbDatepicker]="dateTimePicker" format="dd.MM.yyyy" fullWidth formControlName="currentDate">
+                            <nb-datepicker #dateTimePicker></nb-datepicker>
+                            <div *ngIf="(submitted && form.get('validDate').hasError('required')) || (form.get('validDate').hasError('required')&&form.get('validDate').touched)" class="text-danger" padding>
+                                <div>Please Enter Report Date</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            
+            <!-- <div class="row m-1 p-1">
+                <div class="col-sm-2">
+                  <label class="col-from-label">Report Date</label>
+                </div>
+                <div class="col-sm-6">
+                  <input nbInput placeholder="Pick Date" [nbDatepicker]="dateTimePicker" format="dd.MM.yyyy" fullWidth formControlName="validDate">
+                  <nb-datepicker #dateTimePicker></nb-datepicker>
+                  <div *ngIf="(submitted && form.get('validDate').hasError('required')) || (form.get('validDate').hasError('required')&&form.get('validDate').touched)" class="text-danger" padding>
+                    <div>Please Enter Report Date</div>
+                </div>
+                </div>
+              </div> -->
+                <div class="row m-1 p-1">
+                  <label for="billMonth" class="col-form-label col-md-2">Bill Month</label>
+                  <div class="col-md-4">
+                      <input 
+                      type="text" fullWidth
+                      formControlName="validDate"
+                      nbInput
+                      [bsConfig]="{
+                      minMode: 'month',
+                      dateInputFormat: 'MMM-YYYY',
+                      isAnimated: true,
+                      containerClass: 'theme-default'
+                      }"
+                      #dp="bsDatepicker"
+                      bsDatepicker
+                      (keypress)="space($event)"
+                      placeholder="Enter Bill Month" maxlength="8"/>
+                  </div>            
+                  <div *ngIf="(submitted && form.get('validDate').hasError('required')) || (form.get('validDate').hasError('required')&&form.get('validDate').touched)" class="text-danger" padding>
+                    <div>Please Enter Report Month</div>
+                  </div>
+              </div>
+
+            <div class="row m-1 p-1" >
+                <div class="col-sm-2">
+                  <label class="col-from-label">Report Type<span></span></label>
+                </div>
+                <div class="col-sm-4">
+                  <nb-select hero fullWidth placeholder="Report Type" formControlName="reportType">
+                    <nb-option *ngFor="let item of reportType" [value]="item.key">{{item.value}}</nb-option>
+                  </nb-select>
+                </div>
+              </div>
+
+            <div class="buttons-row">
+                <button *ngIf="isProgress==false" type="submit" nbButton status="success"> Generate Report </button>
+                <button *ngIf="isProgress" type="submit" nbButton status="success" disabled>
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  Generating...
+                </button>
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>
+<div *ngIf="isTrue==true && report !=''">
+    <div class="row" >
+        <div class="col-sm-12 d-flex justify-content-end pb-2">
+          <nb-select placeholder="Export Type" (selectedChange)="onChangeExportType($event)">
+            <nb-option *ngFor="let exportType of exportTypeList" [value]="exportType.id">{{exportType.name}}</nb-option>
+          </nb-select> &nbsp;
+          <button type="submit" nbButton status="info" (click)="onSearchAgain()">Search Again </button>
+          
+        </div> 
+      </div>
+    <ngx-pdf-viewer [report]="report" [documentTitle]="documentTitle"></ngx-pdf-viewer>
+</div>

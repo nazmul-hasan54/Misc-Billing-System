@@ -1,0 +1,176 @@
+<section>
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container-fluid d-flex align-items-center">
+      <div class="logo  row">
+        <div class="col-xs-12 textsa responsive ">
+          <a class="mr-1 " [routerLink]="['']">
+            <img class="logo-image" src="../../../../../../assets/images/BPDB_logo.png" alt="Logo"  height="60" weight="50" />
+            <h1 style="display: inline-block;" class="txtalign">Bangladesh Power Development Board</h1>
+            <!-- <h1 class="text-title text-center txtalign">MISC BILLING SYSTEM</h1> -->
+          </a>
+        
+        </div>
+       
+      </div>
+      
+      <ng-container *ngIf="isToggleIcon">
+        <div
+          class="mobile-toggle d-block d-lg-none d-xl-none"
+          [ngClass]="{
+            showToggleIcon: !isToggleIcon,
+            hideToggleIcon: !isToggleIcon
+          }"
+        >
+          <button
+            class="mobileNav_Toggle"
+            (click)="openModal('mobileNav__modal')"
+          >
+            <i class="fa fa-bars"></i>
+          </button>
+        </div>
+      </ng-container>
+
+      <nav class="navbar navbar-expand-lg navbar-light " >
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav " >
+            <li class="nav-item active mr-3">
+              <a class="text-center nav-item-a txtdec "  [routerLink]="['']">HOME</a>
+            </li>
+            <li class="nav-item  mr-3">
+              <a class="text-center nav-item-a txtdec"  [routerLink]="['/startup/customer-bill']">Miscellaneous Consumer Bill</a>
+            </li>
+            <li class="nav-item mr-3" >
+              <a class="text-center nav-item-a txtdec"  [routerLink]="['/startup/consumer-bills']">Consumer Bill</a>
+            </li>
+            <li class="nav-item mr-3" >
+              <a class="text-center nav-item-a txtdec"  [routerLink]="['/startup/replication-status']">Replication Status</a>
+            </li>
+            <li class="nav-item mr-3" >
+              <a class="text-center nav-item-a txtdec"  href="../../../../assets/resources/Manual.pdf"
+                target="_blank">MANUAL</a>
+            </li>
+      
+            <li class="nav-item mr-3" >
+              <a class="text-center nav-item-a txtdec"  href="../../../../assets/resources/app-debug.apk">APP</a>
+            </li>
+      
+            <li class="nav-item">
+              <a class="text-center nav-item-a txtdec"  [routerLink]="['/auth/login']" routerLinkActive="router-link-active">LOG
+                IN</a>
+            </li>
+      
+          </ul>
+        </div>
+      </nav>
+
+      <!-- .nav-menu -->
+    </div>
+  </header>
+  <!-- End Header -->
+</section>
+<jw-modal id="mobileNav__modal" [@fadeAnimation]>
+  <nav class="navbar mobile-nav-menu">
+    <ul>
+      <li
+        class="nav-item"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <a
+          class="text-center nav-item-a"
+          [routerLink]="['']"
+          (click)="closeModal('mobileNav__modal')"
+          style="text-decoration: none;"
+          >HOME</a
+        >
+      </li>
+      <li
+        class="nav-item"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <a
+          class="text-center nav-item-a"
+          [routerLink]="['/startup/customer-bill']"
+          (click)="closeModal('mobileNav__modal')"
+          style="text-decoration: none;"
+          >Miscellaneous Consumer Bill</a
+        >
+      </li>
+      <li
+        class="nav-item"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <a
+          class="text-center nav-item-a"
+          [routerLink]="['/startup/consumer-bills']"
+          (click)="closeModal('mobileNav__modal')"
+          style="text-decoration: none;"
+          >Consumer Bill</a
+        >
+      </li>
+
+       
+      <li
+        class="nav-item"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <a
+          class="text-center nav-item-a"
+          [routerLink]="['/startup/replication-status']"
+          (click)="closeModal('mobileNav__modal')"
+          style="text-decoration: none;"
+          >REPLICATION STATUS</a
+        >
+      </li>
+      <li
+        class="nav-item"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <a
+          (click)="closeModal('mobileNav__modal')"
+          class="text-center nav-item-a"
+          href="../../../../assets/resources/Manual.pdf"
+          target="_blank"
+          style="text-decoration: none;"
+          >MANUAL</a
+        >
+      </li>
+      <li
+        class="nav-item"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <a
+          (click)="closeModal('mobileNav__modal')"
+          class="text-center nav-item-a"
+          href="../../../../assets/resources/app-debug.apk"
+          style="text-decoration: none;"
+          >APP</a
+        >
+      </li>
+      <li
+        class="nav-item"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <a
+          class="text-center nav-item-a"
+          href="#contact"
+          [routerLink]="['/auth/login']"
+          routerLinkActive="router-link-active"
+          (click)="closeModal('mobileNav__modal')"
+          style="text-decoration: none;"
+          >LOG IN</a 
+        >
+      </li>
+    </ul>
+  </nav>
+  <button class="cubtn" (click)="closeModal('mobileNav__modal')">
+    <i class="fa fa-times"></i>
+  </button>
+</jw-modal>

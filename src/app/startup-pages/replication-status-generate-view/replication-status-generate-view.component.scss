@@ -1,0 +1,96 @@
+::ng-deep{
+    .nb-theme-material-light nb-card {
+        background-color: #ffff;
+        border: 0.0625rem none #b7e3d9;
+        border-radius: 0.25rem;
+        box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
+        color: #000000;
+        font-family: Roboto, sans-serif;
+        font-size: 0.9375rem;
+        font-weight: 400;
+        line-height: 1.25rem;
+        margin-bottom: 1.875rem;
+        scrollbar-face-color: #b7e3d9;
+        scrollbar-track-color: #a5dccf;
+    }
+    .nb-theme-material-light .table {
+        color: #000000 !important;
+    }
+    .nb-theme-default a {
+        color: #3366ff;
+        text-decoration: none;
+    }
+}
+
+.col-form-label {
+    color: black !important;
+    font-size: 14px;
+}
+
+.header-section {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.form-header-section {
+    width: 100%;
+    color: #2596be !important;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 18px;
+    padding-left: 15px;
+    font-family: revert;
+}
+
+.no-border {
+    border: 0;
+    box-shadow: none;
+    background-color: #ffffff;
+    /* You may want to include this as bootstrap applies these styles too */
+}
+
+.hr-vertical {
+    border-top: 2px solid rgb(0, 0, 0);
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+
+nb-icon {
+    font-size: 5rem;
+    cursor: pointer;
+}
+
+#file-input {
+    display: none;
+}
+
+.btnsave {
+    margin-bottom: 50px;
+    padding: 10px 60px;
+    color: white;
+    font-weight: bold;
+    background-color: rgb(60, 210, 105);
+    margin-left: 260px;
+}
+
+label{
+    text-align: right !important;
+}
+
+#nb-calendar-picker {
+    background-color: white;
+}

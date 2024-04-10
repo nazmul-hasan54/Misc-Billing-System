@@ -1,0 +1,14 @@
+<div fxLayout="column" fxLayoutGap="5px" class="dialog-container bg-white p-4 rounded">
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
+        <h2 mat-dialog-title>{{title}}</h2>
+    </div>
+    <hr class="hr-vertical">
+    <div mat-dialog-content class="dialog-content">
+        {{message}}
+    </div>
+
+    <div mat-dialog-actions [align]="'end'" class="btn-div">
+        <button mat-raised-button (click)="onDismiss()" class="btn btn-primary">No</button>
+        <button mat-raised-button color="primary" (click)="onConfirm()" class="btn btn-warning">Yes</button>
+    </div>
+</div>

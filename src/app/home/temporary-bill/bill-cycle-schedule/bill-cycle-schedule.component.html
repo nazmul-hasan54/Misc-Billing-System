@@ -1,0 +1,121 @@
+<nb-card>
+    <nb-card-header class="header-section">Bill Cycle Schedule</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="billcycleform">
+
+            <h2 class="form-header-section">Bill Information</h2>
+            <hr class="hr-vertical">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="location" class="label col-sm-4 col-form-label">Location :</label>
+                        <div class="col-sm-8">
+                            <nb-select [placeholder]="'--Select Location--'" formControlName="locationCode" fullWidth>
+                                <nb-option *ngFor="let location of locationList"
+                                    value="{{location.locationCode}}">{{location.locationName}}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="billGroup" class="label col-sm-4 col-form-label">BillGroup :</label>
+                        <div class="col-sm-8">
+                            <nb-select [placeholder]="'--Select Bill Group--'" formControlName="billGroup" fullWidth>
+                                <nb-option *ngFor="let item of billGroupList" value="{{item.billGroup}}">{{item.billGroupDesc}}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="location" class="label col-sm-4 col-form-label">Year :</label>
+                        <div class="col-sm-8">
+                            <nb-select [placeholder]="'--Select Year--'" formControlName="billYear" fullWidth (selectedChange)="getScheduleMonth($event)">
+                                <nb-option *ngFor="let item of scheduleYear" value="{{item.year}}" >{{item.year}}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="location" class="label col-sm-4 col-form-label">Month :</label>
+                        <div class="col-sm-8">
+                            <nb-select [placeholder]="'--Select Month--'" formControlName="billMonth" fullWidth>
+                                <nb-option *ngFor="let item of scheduleMonth" value="{{item.month}}">{{item.month}}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Reading Start Date :</label>
+                        <div class="col-sm-8">
+                            <input nbInput placeholder="Reading Start Date" format="dd.MM.yyyy"
+                                formControlName="sDate" fullWidth [nbDatepicker]="startDate" (ngModelChange)="startDateChange($event)">
+                            <nb-datepicker #startDate></nb-datepicker>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Reading End Date :</label>
+                        <div class="col-sm-8">
+                            <input nbInput placeholder="Reading End Date" format="dd.MM.yyyy" formControlName="eDate"
+                                fullWidth [nbDatepicker]="endDate" (ngModelChange)="endDateChange($event)">
+                            <nb-datepicker #endDate></nb-datepicker>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Bill Generate Date :</label>
+                        <div class="col-sm-8">
+                            <input nbInput placeholder="Bill Generate Date" format="dd.MM.yyyy"
+                                formControlName="rDate" fullWidth [nbDatepicker]="billDate" (ngModelChange)="generateDateChange($event)">
+                            <nb-datepicker #billDate></nb-datepicker>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Due Date :</label>
+                        <div class="col-sm-8">
+                            <input nbInput placeholder="Due Date" format="dd.MM.yyyy" formControlName="dDate"
+                                fullWidth [nbDatepicker]="dueDate" (ngModelChange)="dueDateChange($event)">
+                            <nb-datepicker #dueDate></nb-datepicker>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </form>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4">
+                        <button class=" btn btn-success mb-lg-5 px-3 mr-3"  [disabled]="!billcycleform.valid" (click)="billSave()"> Save </button>
+                        <button type="button" class="btn btn-warning  mb-lg-5 px-2 " (click)="reset()">Refresh</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </nb-card-body>
+
+</nb-card>

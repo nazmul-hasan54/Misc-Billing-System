@@ -1,0 +1,13 @@
+<div fxLayout="column" fxLayoutGap="5px" class="dialog-container">
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
+        <h5 mat-dialog-title>{{title}}</h5>
+        <button nbButton size="small" (click)="onNoClick()"> <nb-icon icon="close-circle-outline" status="danger"></nb-icon> </button>
+    </div>
+
+    <div mat-dialog-content class="dialog-content">
+        {{message}}
+        <br>
+    </div>
+
+</div>

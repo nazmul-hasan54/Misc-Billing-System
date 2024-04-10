@@ -1,0 +1,41 @@
+
+.dialog-content {
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Roboto";
+    display: flex;
+    justify-content: flex-start;
+}
+
+// .btn-div {
+//     margin-top: 20px;
+// }
+.divider{
+    margin-bottom: 3%;
+    margin-top: 10%;
+    margin-left: -23px;
+    margin-right: -23px;
+}
+.description{
+    margin-left: 1%;;
+}
+.no-btn {
+    width: 82px;
+    height: 38px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.yes-btn {
+    width: 82px;
+    height: 38px;
+    font-size: 14px;
+    text-align: center;
+    margin-left: 2%;
+}
+
+@media screen and(min-width:1400px) and(max-width:2000px) {
+    .btn-div {
+        margin-bottom: -1.5rem;
+    }
+}

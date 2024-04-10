@@ -1,0 +1,77 @@
+table {
+  width: 100%;
+}
+
+th.mat-header-cell {
+  font-size: 16px;
+}
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
+  border-bottom-style: none;
+  border-bottom-width: 0px;
+}
+
+.table-container {
+  overflow: auto;
+  cursor: pointer;
+}
+
+.onTest{
+  width: 70px;
+  height: 30px;
+  font-size: 14px;
+  background-color: #fea600;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  padding-right: 10px !important;
+}
+
+.table-container::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+  border-radius: 30px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.table-container::-webkit-scrollbar-thumb {
+  border-radius: 30px;
+  background-color: #b7e3d9;; // Put your color
+}
+
+.table-container::-webkit-scrollbar-button,
+.table-container::-webkit-scrollbar-track,
+.table-container::-webkit-scrollbar-track-piece,
+.table-container::-webkit-scrollbar-corner,
+.table-container::-webkit-resizer {
+  display: none;
+}
+
+.mat-paginator-sticky {
+  bottom: 0px;
+  position: sticky;
+  z-index: 10;
+  margin-top: 30px !important;
+}
+.remove-background{
+  background: none;
+}
+
+.no-data-row {
+  height: 80px !important;
+  text-align: center !important;
+  border-width: 0 !important;
+  border-bottom-color: rgba(0, 0, 0, 0.12) !important;
+  border-bottom-width: 1px !important;
+  border-style: solid !important; 
+}
+.no-data-icon{
+  height: 48px !important;
+  width: 82px !important;
+}
+.text-font {
+  font-size: 20px;
+  color: gray;
+}

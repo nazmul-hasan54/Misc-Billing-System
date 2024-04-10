@@ -1,0 +1,82 @@
+/*===== All ng-month-picker Style =====*/
+
+::ng-deep {
+    .select2-selection__rendered {
+        line-height: 35px !important;
+    }
+
+    .select2-container .select2-selection--single {
+        height: 39px !important;
+    }
+
+    .select2-selection__arrow {
+        height: 34px !important;
+    }
+
+    .select2-selection__clear {
+        height: 35px !important;
+    }
+}
+
+/* ng-select2 required validation */
+.validateSelect {
+    ::ng-deep {
+        .select2-container .select2-selection--single {
+            border-color: #ed5565 !important;
+        }
+
+        .select2-container--default.select2-container--focus {
+            border-color: #ed5565 !important;
+        }
+
+        .select2-container--default .select2-selection--multiple {
+            border-color: #ed5565 !important;
+        }
+    }
+}
+
+/* ng-select2 required validation message */
+.validateSelectMessage {
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #ed5565;
+}
+
+span {
+    color: #ed5565;
+}
+
+::ng-deep {
+    .mat-dialog-container {
+        display: block;
+        padding: 24px;
+        border-radius: 4px;
+        box-sizing: border-box;
+        overflow: auto;
+        outline: 0;
+        width: 100%;
+        height: 100%;
+        min-height: inherit;
+        max-height: inherit;
+        background: white;
+    }
+
+    .no-btn {
+        width: 105px;
+        height: 45px;
+        font-size: 16px;
+        text-align: center;
+        background-color: blue;
+        color: white;
+    }
+
+    .yes-btn {
+        width: 105px;
+        height: 45px;
+        font-size: 16px;
+        text-align: center;
+        background-color: orangered;
+        color: white;
+    }
+}

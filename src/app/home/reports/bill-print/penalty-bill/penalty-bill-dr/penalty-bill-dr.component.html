@@ -1,0 +1,23 @@
+<div>
+    <nb-card fxLayout="row" fxLayout.xs="column" fxLayoutAlign="end center" fxLayoutGap="30px"
+        fxLayoutAlign.xs="none none">
+        <div class="row ">
+            <div class="col-sm-12">
+                <nb-select placeholder="Export Type" (selectedChange)="onChangeExportType($event)">
+                    <nb-option *ngFor="let exportType of exportTypeList"
+                        [value]="exportType.id">{{exportType.name}}</nb-option>
+                </nb-select> &nbsp;
+                <button type="submit" nbButton status="info" (click)="onSearchAgain()"> Search Again </button>
+
+            </div>
+        </div>
+
+    </nb-card>
+    <div>
+        <ngx-pdf-viewer [report]="report" [documentTitle]="documentTitle"></ngx-pdf-viewer>
+
+    </div>
+</div>
+<div>
+
+</div>

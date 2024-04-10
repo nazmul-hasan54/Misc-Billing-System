@@ -1,0 +1,26 @@
+@import '../../../../../globalscss.scss';
+.col-form-label {
+    color: black !important;
+    font-size: 14px;
+}
+
+.header-section {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+::ng-deep{
+    .nb-theme-default [nbInput].shape-rectangle {
+      border-radius: 0.25rem;
+      background-color: #edf1f7 !important;
+    }
+  }
+
+  label{
+    text-align: right !important;
+}
+
+  

@@ -1,0 +1,39 @@
+.dialog-container .mat-dialog-title {
+    font-size: 26px !important;
+    font-weight: 500 !important;
+    font-family: "Roboto" !important;
+    padding: 0 20px !important;
+}
+
+.dialog-content {
+    font-size: 20px;
+    font-weight: 400;
+    padding-left: 45px;
+    font-family: "Roboto";
+}
+
+.hr-vertical{
+    border-top: 2px solid rgb(12, 19, 221);
+}
+
+.btn-div {
+    margin-top: 28px;
+}
+.no-btn {
+    width: 105px;
+    height: 45px;
+    font-size: 16px;
+    text-align: center;
+}
+.yes-btn {
+    width: 105px;
+    height: 45px;
+    font-size: 16px;
+    text-align: center;
+}
+
+@media screen and( min-width:1400px) and( max-width:2000px) {
+    .btn-div {
+        margin-top: 5rem;
+    }
+}

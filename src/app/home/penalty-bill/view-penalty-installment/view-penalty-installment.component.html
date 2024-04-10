@@ -1,0 +1,139 @@
+<nb-card>
+  <nb-card-header class="header-section">Penalty Bill Installment Plan Details</nb-card-header>
+
+  <nb-card-body class="container">
+    <form [formGroup]="installmentform">
+      <h2 class="form-header-section">Bill Information</h2>
+
+      <hr class="hr-vertical" />
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group row">
+            <label for="customerType" class="label col-sm-4 col-form-label">Customer Number:</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control no-border" formControlName="customerNumber" readonly fullWidth
+                placeholder="Customer Number" />
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group row">
+            <label for="customerType" class="label col-sm-4 col-form-label">Location :</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control no-border" formControlName="location" readonly
+                placeholder="Location" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group row">
+            <label for="customerType" class="label col-sm-4 col-form-label">Name :</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control no-border" formControlName="customerName" readonly
+                placeholder=" Customer Name" />
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group row">
+            <label for="customerType" class="label col-sm-4 col-form-label">Bill Number :</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control no-border" formControlName="billNumber" readonly
+                placeholder="Bill Number " />
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group row">
+            <label for="customerType" class="label col-sm-4 col-form-label">Tariff :</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control no-border" formControlName="tariff" readonly
+                placeholder=" Tariff :" />
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group row">
+            <label for="customerType" class="label col-sm-4 col-form-label">Total Amount :</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control no-border" formControlName="billAmount" readonly
+                placeholder=" Bill Amount" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group row">
+            <label for="customerType" class="label col-sm-4 col-form-label">1st Installment :</label>
+            <div class="col-sm-7">
+              <input type="number" class="form-control no-border" readonly formControlName="installmentPercn" fullWidth
+                placeholder="1st Installment" />
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group row">
+            <label for="customerType" class="label col-sm-4 col-form-label">Rest Amount Installment :</label>
+            <div class="col-sm-8">
+              <input type="number" class="form-control no-border" readonly formControlName="installNumber" fullWidth
+                placeholder="Rest Amount Installment" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+
+      <h2 class="form-header-section">Installment Details</h2>
+      <hr class="hr-vertical" />
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Sn</th>
+            <th>Principle</th>
+            <th>Vat</th>
+            <th>Lps</th>
+            <th>Amount to be paid</th>
+            <th>Due Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let install of lstInstallment;let i = index">
+            <td> {{i+1}}</td>
+            <td> {{install.principleAmount}}</td>
+            <td> {{install.vatAmount}}</td>
+            <td> {{install.lpsAmount}}</td>
+            <td> {{install.totalInAmount}}</td>
+            <td> {{install.dueDate | date}}</td>
+            <td> <button (click)="dateExtend(install)"
+                class="btn btn-sm btn-warning">Extend Date</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+
+
+    <!-- <div class="row mb-2">
+      <div class="col-sm-2 offset-sm-2">
+        <button nbButton fullWidth status="primary" (click)="saveInstallment()">
+          Save
+        </button>
+      </div>
+    </div> -->
+
+  </nb-card-body>
+</nb-card>

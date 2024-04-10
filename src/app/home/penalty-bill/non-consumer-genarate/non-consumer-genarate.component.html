@@ -1,0 +1,364 @@
+<nb-card>
+    <nb-card-header class="header-section"></nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="nonconsumerbill">
+            <h2 class="form-header-section">Customer Information</h2>
+
+            <hr class="hr-vertical">
+
+        <div class="row" *ngIf="roleName == 'Admin'">
+        
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <label for="customerType" class="label col-sm-4 col-form-label">Location Code :</label>
+                    <div class="col-sm-8">
+                        <nb-select placeholder="Select locationName" formControlName="locationCode"
+                            (selectedChange)="nonConsumerLocationDes(this.f.locationCode.value)" fullWidth>
+                            <nb-option *ngFor="let item of locationNamelist" [value]="item.code">{{item.name}}</nb-option>
+                        </nb-select>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <label for="customerType" class="label col-sm-4 col-form-label">Location Description :</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control no-border" formControlName="locationName" readonly fullWidth
+                            placeholder="Location Description">
+                    </div>
+                </div>
+            </div>
+        
+        
+        </div>
+        
+        <div class="row" *ngIf="roleName!= 'Admin'">
+           
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <label for="customerType" class="label col-sm-4 col-form-label">Location Code :</label>
+                    <div class="col-sm-8">
+                        <nb-select placeholder="Select locationName" formControlName="locationCode"
+                            (selectedChange)="nonConsumerLocationDes(this.f.locationCode.value)" fullWidth>
+                            <nb-option *ngFor="let item of locationFormSession"
+                                [value]="item.code">{{item.code}}-{{item.name}}</nb-option>
+                        </nb-select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <label for="customerType" class="label col-sm-4 col-form-label">Location Description :</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control no-border" formControlName="locationName" readonly fullWidth
+                            placeholder="Location Description">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Name :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control no-border" formControlName="customerName" 
+                                placeholder="Customer Name">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Address :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control no-border" formControlName="customerAddr" 
+                                placeholder="Address">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">NID Number<span
+                                class="text-danger">*</span> :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" formControlName="nidNumber" fullWidth placeholder="NID Number" onkeypress="return /[0-9]/i.test(event.key)" maxlength="16">
+                            <div *ngIf="f.nidNumber.touched && f.nidNumber.invalid" class="alert alert-danger">
+                                <div *ngIf="f.nidNumber.errors">Please enter NID number between 10  to 16 digit </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Mobile<span
+                                class="text-danger">*</span> :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" formControlName="mobileNumber" fullWidth placeholder="Mobile Number" onkeypress="return /[0-9]/i.test(event.key)" maxlength="11">
+                            <div *ngIf="f.mobileNumber.touched && f.mobileNumber.invalid" class="alert alert-danger">
+                                <div *ngIf="f.mobileNumber.errors?.required">Please enter Mobile Number</div>
+                                <div *ngIf="f.mobileNumber.errors?.pattern">Mobile Number must be 11 digit</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <h2 class="form-header-section">Meter Information</h2>
+
+            <hr class="hr-vertical">
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Meter Type :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control no-border" formControlName="meterTypeDesc" readonly
+                                placeholder=" Meter Type">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+
+                </div>
+            </div>
+
+            <h2 class="form-header-section">Bill Information
+            </h2>
+            <hr class="hr-vertical">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="billReasonCode" class="label col-sm-4 col-form-label">Reason<span class="text-danger">*</span> : :</label>
+                        <div class="col-sm-8">
+                            <nb-select placeholder="Select Billing Reason" formControlName="billReasonCode" fullWidth>
+                                <nb-option *ngFor="let reason of billingReasonList"
+                                    value="{{reason.billReasonCode}}">{{reason.billReasonDesc}}</nb-option>
+                            </nb-select>
+                            <div *ngIf="f.billReasonCode.touched && f.billReasonCode.invalid" class="alert alert-danger">
+                                <div *ngIf="f.billReasonCode.errors?.required">Please Enter Billing Reason</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="status" class="label col-sm-4 col-form-label">Rate Multiply Type<span
+                                class="text-danger">*</span> :</label>
+                        <div class="col-sm-8">
+                            <div class="custom-control custom-radio custom-control-inline ">
+                                <input formControlName="multypliBy" [value]="'3'" tabindex="-1" name="multypliBy"
+                                    type="radio" class="custom-control-input" id="active" checked (click)="resetAmount(3)">
+                                <label class="custom-control-label" for="active">3X</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline ">
+                                <input formControlName="multypliBy" [value]="'2'" tabindex="-1" name="multypliBy"
+                                    type="radio" class="custom-control-input" id="inactive" (click)="resetAmount(2)">
+                                <label class="custom-control-label" for="inactive">2X</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline ">
+                                <input formControlName="multypliBy" [value]="'F'" tabindex="-1" name="multypliBy"
+                                    type="radio" class="custom-control-input" id="fixedAmount" (click)="resetAmount('F')">
+                                <label class="custom-control-label" for="fixedAmount">Fixed Amount </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Tarrif<span class="text-danger">*</span> :</label>
+                        <div class="col-sm-8">
+                            <nb-select placeholder="Select Tarrif" formControlName="tariffDesc" fullWidth (selectedChange)="changeAmount($event)" >
+                                <nb-option *ngFor="let tarrifs of tarrifList"
+                                    value="{{tarrifs.tariff}}">{{tarrifs.tariff}}</nb-option>
+                            </nb-select>
+                            <div *ngIf="f.tariffDesc.touched && f.tariffDesc.invalid" class="alert alert-danger">
+                                <div *ngIf="f.tariffDesc.errors?.required">Please Enter Tarrif</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group row"  >
+                        <label for="customerType" *ngIf="this.f.multypliBy.value !='F'" class="label col-sm-4 col-form-label">Penalty Unit :</label>
+                        <div class="col-sm-4" *ngIf="this.f.multypliBy.value !='F'">
+                            <input formControlName="penaltyUnit" type="number" class="form-control" (keyup)="chnageAmountbyUnit($event)" fullWidth placeholder="Penalty Unit" onkeypress="return /[0-9]/i.test(event.key)">
+                            
+                        </div>
+                        <div class="col-sm-4">
+                            <button *ngIf="isProgress==false && this.f.billReasonCode.value!=null && this.f.tariffDesc.value!=null && this.f.penaltyUnit.value>0 || isProgress==false && this.f.multypliBy.value=='F'&& this.f.billReasonCode.value!=null && this.f.tariffDesc.value!=null  "  (click)="calculateBill()" nbButton status="primary">Calculate Bill
+                            </button>
+                            <button *ngIf="isProgress" class="btn btn-primary" type="button" disabled>
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Calculating...
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             
+            
+            <div class="row">
+                <div class="col-sm-6"  *ngIf="this.f.multypliBy.value=='F'">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Principal Amount :</label>
+                        <div class="col-sm-8">
+
+                            <input disabled type="number" class="form-control no-border"
+                                formControlName="principleAmount" fullWidth placeholder="Principal Amount">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6"  *ngIf="this.f.multypliBy.value=='3' || this.f.multypliBy.value=='2'">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Principal Amount :</label>
+                        <div class="col-sm-8">
+
+                            <input disabled type="number" class="form-control no-border"  readonly
+                                formControlName="principleAmount" fullWidth placeholder="Principal Amount">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Vat Amount :</label>
+                        <div class="col-sm-8">
+
+                            <input disabled type="text" class="form-control no-border" formControlName="vatAmount" fullWidth
+                                placeholder="Vat Amount">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Imposed by<span class="text-danger">*</span> :</label>
+                        <div class="col-sm-8">
+                            <nb-select placeholder="Select Imposed By" formControlName="imposedByCode" fullWidth>
+                                <nb-option *ngFor="let imposed of imposedByList"
+                                    value="{{imposed.imposedByCode}}">{{imposed.imposedByDesc}}</nb-option>
+                            </nb-select>
+                            <div *ngIf="f.imposedByCode.touched && f.imposedByCode.invalid" class="alert alert-danger">
+                                <div *ngIf="f.imposedByCode.errors?.required">Please Enter Imposed By</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Total Amount<span class="text-danger">*</span> :</label>
+                        <div class="col-sm-8">
+
+                            <input disabled type="text" class="form-control no-border" formControlName="totalAmount" fullWidth
+                                placeholder="Total Amount">
+                                <div *ngIf="f.totalAmount.touched && f.totalAmount.invalid" class="alert alert-danger">
+                                    <div *ngIf="f.totalAmount.errors?.required">Total Amount is Required</div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Due Date<span class="text-danger">*</span> :</label>
+                        <div class="col-sm-8">
+                            <input nbInput placeholder="Form Picker" format="dd.MM.yyyy" formControlName="dDate" fullWidth
+                                [nbDatepicker]="formpicker" (ngModelChange)="dueDateChange($event)" >
+                            <nb-datepicker #formpicker [min]="minDate" ></nb-datepicker>
+                            <div *ngIf="f.dDate.touched && f.dDate.invalid" class="alert alert-danger">
+                                <div *ngIf="f.dDate.errors?.required">Please Enter Due Date</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <h3 class="col-sm-4center-block m-1 p-1" style="text-align:center;">Document</h3>
+            </div>
+            
+            
+            <div class="row">
+                <div class="col-sm-4 center-block border border-primary rounded m-1 p-2" style="text-align:center;">
+                    <label for="file-input">
+                        <nb-icon for="file-input" icon="cloud-upload-outline" status="primary"
+                            [options]="{ animation: { type: 'zoom' } }"></nb-icon>
+                    </label>
+                    <ng-container>
+                        <input id="file-input" type="file" class="btn btn-secondary" (change)="onFileSelected($event)" multiple />
+                    </ng-container>
+                </div>
+            </div>
+            
+            
+            
+            <div class="row">
+                <div class="col-sm-4 center-block m-1 p-1" style="text-align:center;">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>File Name</th>
+                                <th>Download</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody class="upload-name-style">
+                            <tr *ngFor="let item of arrayList; let i = index">
+                                <td>
+                                    <strong>{{ item.fileNames[0] }}</strong>
+                                </td>
+                                <td>
+                                    <button class="btn btn-secondary btn-sm" (click)="fileDownload(i)">
+                                        Download
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm" (click)="fileDelete(i)">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+        </form>
+        <div class="row">
+            <div class="col-sm-2">
+            <button *ngIf="isSaving==false" [disabled]="isSaveDisabled" nbButton fullWidth status="primary" (click)="NonconsumerBillSave()"> Save </button>
+            <button *ngIf="isSaving" class="btn btn-primary" type="button" disabled>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Saving...
+            </button>
+            </div>
+            
+            <!-- <div class="col-sm-2">
+                <button nbButton fullWidth status="warning"> Installment plan </button>
+            </div> -->
+
+            <div class="col-sm-2">
+                <button nbButton fullWidth status="warning" (click)="reset()"> Refresh </button>
+            </div>
+
+        </div>
+    </nb-card-body>
+</nb-card>

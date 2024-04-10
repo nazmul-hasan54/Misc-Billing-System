@@ -1,0 +1,253 @@
+<nb-card *ngIf="isTrue==false">
+    <nb-card-header class="form-header-section ">
+        Ministry Customer
+    </nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="ministryCustomerForm">
+            <h2 class="header-section">Customer Information</h2>
+            <hr class="hr-vertical">
+            
+            
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="zoneCode" class="label col-sm-4 col-form-label">Zone<span class="text-danger">*</span> :</label>
+                        <div class="col-sm-8">
+                            <nb-select name="" id="" formControlName="zoneCode" fullWidth placeholder="Select Zone" (selectedChange)="getCircleByZone($event)">
+                                <nb-option *ngFor="let item of zoneList" [value]="item.code">{{item.name}}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6" *ngIf="this.formval.zoneCode !=null">
+                    <div class="form-group row">
+                        <label for="circleCode" class="label col-sm-4 col-form-label">Circle :</label>
+                        <div class="col-sm-8">
+                            <nb-select name="" id="" formControlName="circleCode" fullWidth placeholder="Select Circle" (selectedChange)="getLocationByCircle($event)">
+                                <nb-option *ngFor="let item of circleList" [value]="item.code">{{item.name}}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6" *ngIf="this.formval.circleCode !=null && this.isLocEdit == false">
+                    <div class="form-group row">
+                        <label for="locationCode" class="label col-sm-4 col-form-label">Location<span class="text-danger">*</span> :</label>
+                        <div class="col-sm-8">
+                            <nb-select name="" id="" formControlName="locationCode" fullWidth placeholder="Select Location" (selectedChange)="getDbByLocation($event)">
+                                <nb-option *ngFor="let item of locationList" [value]="item.code" >{{item.code}} - {{item.name}}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6" *ngIf="this.isLocEdit == true">
+                    <div class="form-group row">
+                        <label for="locationCode" class="label col-sm-4 col-form-label">Location<span class="text-danger">*</span> :</label>
+                        <div class="col-sm-8">
+                            <!-- <nb-select name="" id="" formControlName="locationCode" fullWidth placeholder="Select Location">
+                                <nb-option *ngFor="let item of locationList" [value]="item.key" >{{item.value}}</nb-option>
+                            </nb-select> -->
+                            <input type="text" class="form-control no-border" 
+                                formControlName="locationCode" readonly placeholder="Location" >
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6" *ngIf="this.formval.locationCode">
+                    <div class="form-group row">
+                        <label for="dbCode" class="label col-sm-4 col-form-label">Center<span class="text-danger">*</span> :</label>
+                        <div class="col-sm-8">
+                            <nb-select name="" id="" formControlName="dbCode" fullWidth placeholder="Select Center">
+                                <nb-option *ngFor="let item of dbData" [value]="item.key">{{item.value}}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerNo" class="label col-sm-4 col-form-label">Customer Number<span class="text-danger">*</span> :</label>
+                        <div class="col-sm-8">
+                            <input nbInput type="number" formControlName="customerNo" (keydown)="checkCustomerExistence($event)" fullWidth placeholder="Enter Customer Number">
+                            <!-- <div *ngIf="f.customerNo.touched && f.customerNo.invalid" class="alert alert-danger">
+                                <div *ngIf="f.customerNo.errors?.required">Please enter Customer number</div>
+                                <div *ngIf="f.customerNo.errors?.pattern">Customer number must be 8 digit</div>
+                            </div> -->
+                        </div>
+
+                    </div>
+                    
+                </div>
+                <!-- <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerNameBN" class="label col-sm-4 col-form-label">Customer Name (BN) :</label>
+                        <div class="col-sm-8">
+                            <input nbInput type="text" formControlName="customerNameBN" fullWidth placeholder="Enter Customer Name">
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+
+
+            <div class="row">
+                <!-- <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerNameEN" class="label col-sm-4 col-form-label">Customer Name (EN) :</label>
+                        <div class="col-sm-8">
+                            <input nbInput type="text" formControlName="customerNameEN" fullWidth placeholder="Enter Customer Name">
+                        </div>
+                    </div>
+                </div> -->
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="divisionCode" class="label col-sm-4 col-form-label" >Division :</label>
+                        <div class="col-sm-8">
+                            <nb-select formControlName="divisionCode"  fullWidth placeholder="Select Division" (selectedChange)="getDistrictByDivision($event)">
+                                <nb-option *ngFor="let item of divisionList" [value]="item.key">{{item.value}}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="districtCode" class="label col-sm-4 col-form-label" >District :</label>
+                        <div class="col-sm-8">
+                            <nb-select formControlName="districtCode"  fullWidth placeholder="Select District" (selectedChange)="getUpozilaByDistrict($event)">
+                                <nb-option *ngFor="let item of districtList" [value]="item.key">{{item.value}}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="upazilaCode" class="label col-sm-4 col-form-label">Upazila :</label>
+                        <div class="col-sm-8">
+                            <nb-select formControlName="upazilaCode"  fullWidth placeholder="Select Upazila">
+                                <nb-option *ngFor="let item of upozilaList" [value]="item.key">{{item.value}}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="header-section">Ministry Information</h2>
+            <hr class="hr-vertical">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="ministryCode" class="label col-sm-4 col-form-label" >Ministry<span class="text-danger">*</span> :</label>
+                        <div class="col-sm-8">
+                            <nb-select formControlName="ministryCode" fullWidth placeholder="Select Ministry" (selectedChange)="getMinistryDept($event)">
+                                <nb-option *ngFor="let item of ministryList" [value]="item.code">{{item.name}}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6" *ngIf="this.formval.ministryCode != null">
+                    <div class="form-group row">
+                        <label for="departmentCode" class="label col-sm-4 col-form-label">Department :</label>
+                        <div class="col-sm-8">
+                            <nb-select formControlName="departmentCode" fullWidth placeholder="Select Department">
+                                <nb-option  *ngFor="let item of ministryDept "  [value]="item.key">{{item.value}}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6" *ngIf="this.formval.ministryCode == 2">
+                    <div class="form-group row">
+                        <label for="citycorporationCode" class="label col-sm-4 col-form-label">City Corporation :</label>
+                        <div class="col-sm-8">
+                            <nb-select name="" id="" formControlName="citycorporationCode" fullWidth placeholder="Select City Corporation">
+                                <nb-option  *ngFor="let item of cityCorporationList "  [value]="item.code">{{item.name}}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6" *ngIf="this.formval.ministryCode == 2">
+                    <div class="form-group row">
+                        <label for="pouroshovaCode" class="label col-sm-4 col-form-label">Pouroshova :</label>
+                        <div class="col-sm-8">
+                            <nb-select name="" id="" formControlName="pouroshovaCode" fullWidth placeholder="Select Pouroshova">
+                                <nb-option  *ngFor="let item of lstPouroshova" [value]="item.key">{{item.value}}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6" *ngIf="this.formval.ministryCode == 2">
+                    <div class="form-group row">
+                        <label for="unionParishadCode" class="label col-sm-4 col-form-label">Union Parishad :</label>
+                        <div class="col-sm-8">
+                            <nb-select name="" id=""  fullWidth formControlName="unionParishadCode" placeholder="Select Union Parishod">
+                                <nb-option  *ngFor="let item of unionParishadList "  [value]="item.key">{{item.value}}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6" *ngIf="this.formval.ministryCode ==29">
+                    <div class="form-group row">
+                        <label for="religiousCode" class="label col-sm-4 col-form-label">Is Rebate :</label>
+                        <div class="col-sm-8">
+                            <nb-select name="" id="" formControlName="religiousCode" placeholder="-------Select-------" fullWidth >
+                                <nb-option *ngFor="let item of religiousList" [value]="item.id">{{item.name}}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6" *ngIf="this.formval.ministryCode == '39'">
+                    <div class="form-group row">
+                        <label for="nonBengaliCampCode" class="label col-sm-4 col-form-label">Non-Bengali :</label>
+                        <div class="col-sm-8">
+                            <nb-select name="" id="" formControlName="nonBengaliCampCode" placeholder="Select Non-Bengali Camp" fullWidth >
+                                <nb-option *ngFor="let item of nonBengaliList" [value]="item.key">{{item.value}}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6" *ngIf="this.formval.ministryCode == '16'">
+                    <div class="form-group row">
+                        <label for="isPolice" class="label col-sm-4 col-form-label">Is Police:</label>
+                        <div class="col-sm-8">
+                            <nb-select name="" id="" formControlName="isPolice" placeholder="-------Select-------" fullWidth >
+                                <nb-option *ngFor="let item of policeList" [value]="item.id">{{item.name}}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4 mb-3">
+                <div class="col-sm-2">
+                    <button type="button" [disabled]="this.isSaveDisabled" nbButton fullWidth status="primary" (click)="save()">Save</button>
+                </div>
+                <div class="col-sm-2">
+                    <button nbButton fullWidth [disabled]="this.isRefreshDisabled" status="warning" (click)="refresh()">Refresh</button>
+                </div>
+                <div class="col-sm-2">
+                    <button nbButton fullWidth status="success" type="button" (click)="ViewPage()">View</button>
+                </div>
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>
+<div *ngIf="isTrue==true && report !=''">
+
+    <div class="row">
+      <div class="col-sm-12 d-flex justify-content-end pb-2">
+        <!-- <nb-select placeholder="Export Type" (selectedChange)="onChangeExportType($event)">
+          <nb-option *ngFor="let exportType of exportTypeList" [value]="exportType.id">{{exportType.name}}</nb-option>
+        </nb-select> &nbsp; -->
+        <button type="submit" nbButton status="info" (click)="onSearchAgain()">Save Again </button>
+      </div>
+    </div>
+    <ngx-pdf-viewer [report]="report" [documentTitle]="documentTitle"></ngx-pdf-viewer>
+  </div>

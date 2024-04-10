@@ -1,0 +1,37 @@
+<div class="container">
+    <form [formGroup]="paymnetForm">
+        <div class="row  justify-content-center">
+            <div class="col-sm-6 ">
+                <h4 class="text-center">Make Payment</h4>
+                    <div class="row">
+                        <div class="col-sm-6 mb-3"> <label for="BillNumber">Bill Number</label> 
+                            <input type="text" readonly class="form-control" formControlName="billNumber" > 
+                        </div>
+                        <div class="col-sm-6 mb-3"> 
+                            <label for="customerNumber">Customer number</label>
+                             <input type="text" readonly class="form-control" formControlName="customerNumber"  > 
+                            </div>
+                    </div>
+                    <div class="row justify-content-center mb-4">
+                            <img src="../../assets/images/sslcommerz-card-entry.png" alt="e-commarce-gateway" 
+                            height="500" >
+                        
+                    </div>
+                
+                    <!-- <hr class="mb-4">  -->
+                    <div class="row">
+                        <div class="col-sm-6  d-flex justify-content-end">
+                            <button class="btn btn-success" (click)="nextPage()" type="button">Make
+                                Payment</button>
+                        </div>
+                        <div class="col-sm-6">
+                            <button class="btn btn-primary d-flex justify-content-start px-5 " (click)="BackPage()"  type="button">Back
+                                </button>
+                        </div>
+                    </div>
+                   
+            </div>
+        </div>
+    </form>
+    
+</div>

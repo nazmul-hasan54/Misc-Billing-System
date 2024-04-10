@@ -1,0 +1,546 @@
+<nb-card>
+    <nb-card-header class="header-section">Transfer Customer Postpaid To Prepaid</nb-card-header>
+
+    <nb-card-body>
+        <h2 class="form-header-section">Customer Information</h2>
+        <hr class="hr-vertical">
+
+        <form [formGroup]="posttopreform">
+            <div class="row" *ngIf="roleName == 'Admin'">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Location :</label>
+                        <div class="col-sm-8">
+                            <nb-select placeholder="Select LocationName" formControlName="locationCode" fullWidth>
+                                <nb-option *ngFor="let item of locationNamelist"
+                                    [value]="item.code">{{item.name}}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Customer Number<span
+                                class="text-danger">*</span> :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" [readOnly]="isEditable"
+                                formControlName="customerNumber" (keydown)="getcustomerDetails($event)" fullWidth
+                                placeholder="Customer Number" onkeypress="return /[0-9]/i.test(event.key)"
+                                maxlength="8">
+                            <div *ngIf="f.customerNumber.touched && f.customerNumber.invalid"
+                                class="alert alert-danger">
+                                <div *ngIf="f.customerNumber.errors?.required">Please enter Customer number</div>
+                                <div *ngIf="f.customerNumber.errors?.pattern">Customer number must be 8 digit</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row" *ngIf="roleName != 'Admin'">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Customer Number<span
+                                class="text-danger">*</span>
+                            :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" [readOnly]="isEditable"
+                                formControlName="customerNumber" (keydown)="getcustomerDetails($event)" fullWidth
+                                placeholder="Customer Number" onkeypress="return /[0-9]/i.test(event.key)"
+                                maxlength="8">
+                            <div *ngIf="f.customerNumber.touched && f.customerNumber.invalid"
+                                class="alert alert-danger">
+                                <div *ngIf="f.customerNumber.errors?.required">Please enter Customer number</div>
+                                <div *ngIf="f.customerNumber.errors?.pattern">Customer number must be 8 digit</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Location :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control no-border" formControlName="locationCode" readonly
+                                placeholder="Location">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Name :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control no-border" formControlName="customerName" readonly
+                                placeholder=" Customer Name">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Address :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control no-border" formControlName="customerAddr" readonly
+                                placeholder="Address">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Tariff :</label>
+                        <div class="col-sm-8">
+                            <input type="text" formControlName="tariffDesc" class="form-control no-border" readonly
+                                placeholder=" Tariff">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Business Type :</label>
+                        <div class="col-sm-8">
+                            <input type="text" formControlName="businessType" class="form-control no-border" readonly
+                                placeholder="Business Type ">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Prev. Acc Number :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control no-border" formControlName="prvAcNo" readonly
+                                placeholder=" Prev. Acc Number">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Area Code :</label>
+                        <div class="col-sm-8">
+                            <input type="text" formControlName="areaCode" class="form-control no-border" readonly
+                                placeholder="Area Code">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Arrear Amount :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control no-border" formControlName="arrearAmount" readonly
+                                placeholder=" Arrear Amount">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Contact Name :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" formControlName="contactName"
+                                placeholder=" Contact Name">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">NID Number<span
+                                class="text-danger">*</span>
+                            :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" [readOnly]="isEditable" formControlName="nidNumber"
+                                fullWidth placeholder="NID Number" onkeypress="return /[0-9]/i.test(event.key)"
+                                maxlength="17">
+                            <div *ngIf="f.nidNumber.touched && f.nidNumber.invalid" class="alert alert-danger">
+                                <div *ngIf="f.nidNumber.errors">Please enter NID number between 10 to 17 digit </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Mobile<span
+                                class="text-danger">*</span>
+                            :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" [readOnly]="isEditable"
+                                formControlName="mobileNumber" fullWidth placeholder="Mobile Number"
+                                onkeypress="return /[0-9]/i.test(event.key)" maxlength="11">
+                            <div *ngIf="f.mobileNumber.touched && f.mobileNumber.invalid" class="alert alert-danger">
+                                <div *ngIf="f.mobileNumber.errors?.required">Please enter Mobile Number</div>
+                                <div *ngIf="f.mobileNumber.errors?.pattern">Mobile Number must be 11 digit</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="tin" class="label col-sm-4 col-form-label">Latitude :</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" formControlName="latitude" fullWidth
+                                placeholder="Latitude">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="tin" class="label col-sm-4 col-form-label">Longitude :</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" formControlName="longitude" fullWidth
+                                placeholder="Longitude">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="tin" class="label col-sm-4 col-form-label">Tin :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" formControlName="tin" fullWidth
+                                placeholder="Tin Number">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Division :</label>
+                        <div class="col-sm-8">
+                            <nb-select placeholder="Select Division" formControlName="divisionCode" (selectedChange)="GetPrepaidDistrictByDivision($event)" fullWidth>
+                                <nb-option *ngFor="let item of divisionLists"
+                                    [value]="item.key">{{item.value}}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">District :</label>
+                        <div class="col-sm-8">
+                            <nb-select placeholder="Select District" formControlName="districtCode" (selectedChange)="GetPrepaidThanaByDistrict($event)" fullWidth>
+                                <nb-option *ngFor="let item of districtLists"
+                                    [value]="item.key">{{item.value}}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Thana :</label>
+                        <div class="col-sm-8">
+                            <nb-select placeholder="Select Thana" formControlName="thanaCode" fullWidth>
+                                <nb-option *ngFor="let item of thanaLists"
+                                    [value]="item.key">{{item.value}}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <h2 class="form-header-section">Meter Information</h2>
+
+            <hr class="hr-vertical">
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Meter Type :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control no-border" formControlName="meterTypeDesc" readonly
+                                placeholder=" Meter Type">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Meter Number :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control no-border" formControlName="meterNum" readonly
+                                placeholder="Meter Number">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row"
+            *ngIf="!(this.f.meterTypeCode.value=='01' || this.f.meterTypeCode.value=='03' || this.f.meterTypeCode.value=='04' || this.f.meterTypeCode.value=='11' ) ">
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <label for="customerType" class="label col-sm-4 col-form-label">Last Bill Reading OPk :</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control no-border" readOnly
+                            formControlName="lastBillReadingOfPk" fullWidth placeholder="Last Bill Reading OPk">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <label for="customerType" class="label col-sm-4 col-form-label">Last Bill Reading Pk :
+                    </label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control no-border" readOnly
+                            formControlName="lastBillReadingPk" fullWidth placeholder="Last Bill Reading Pk">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-sm-6"
+                *ngIf="this.f.meterTypeCode.value=='01' || this.f.meterTypeCode.value=='03' || this.f.meterTypeCode.value=='04' || this.f.meterTypeCode.value=='11'">
+                <div class="form-group row">
+                    <label for="customerType" class="label col-sm-4 col-form-label">Last Bill Reading SR:</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control no-border" readOnly
+                            formControlName="lastBillReadingSr" fullWidth placeholder="Last Bill Reading SR">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                
+            </div>
+        </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Meter Condition :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control no-border" formControlName="meterConditionDesc"
+                                readonly placeholder="Meter Condition">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Meter Remove Date <span
+                            class="text-danger">*</span>:</label>
+                        <div class="col-sm-8">
+                            <input nbInput placeholder="Meter Remove Date" [disabled]="isEditable" format="dd.MM.yyyy"
+                                formControlName="lDate" fullWidth [nbDatepicker]="lastReading"
+                                (ngModelChange)="dateChange($event)">
+                            <nb-datepicker #lastReading [max]="maxDate"></nb-datepicker>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row"
+                *ngIf="!(this.f.meterTypeCode.value=='01' || this.f.meterTypeCode.value=='03' || this.f.meterTypeCode.value=='04' || this.f.meterTypeCode.value=='11' ) ">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Reading Off Peak <span
+                            class="text-danger">*</span> :</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" [readOnly]="isEditable"
+                                formControlName="lastReadingOffPeak" fullWidth placeholder="Last Reading Off Peak">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Reading Peak <span
+                            class="text-danger">*</span> :
+                        </label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" [readOnly]="isEditable"
+                                formControlName="lastReadingPeak" fullWidth placeholder="Last Reading Peak">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+
+                <div class="col-sm-6"
+                    *ngIf="this.f.meterTypeCode.value=='01' || this.f.meterTypeCode.value=='03' || this.f.meterTypeCode.value=='04' || this.f.meterTypeCode.value=='11'">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Last Reading <span
+                            class="text-danger">*</span>:</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" [readOnly]="isEditable"
+                                formControlName="lastReading" fullWidth placeholder="Last Reading">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="tin" class="label col-sm-4 col-form-label">Meter Seal No. Left :</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" formControlName="leftSerialNo" fullWidth
+                                placeholder="Meter Seal No Left">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="tin" class="label col-sm-4 col-form-label">Meter Seal No. Right :</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" formControlName="rightSerialNo" fullWidth
+                                placeholder="Meter Seal No Right">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="tin" class="label col-sm-4 col-form-label">Terminal Loss :</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" formControlName="terminalLoss" fullWidth
+                                placeholder="Terminal Loss">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="tin" class="label col-sm-4 col-form-label">Sanction Load :</label>
+                        <div class="col-sm-8">
+                            <input type="number" readonly class="form-control" formControlName="sanctionedLoad" fullWidth
+                                placeholder="Sanction Load">
+
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+
+            <br>
+            <h2 class="form-header-section">Prepaid Meter Information</h2>
+
+            <hr class="hr-vertical">
+
+            <div class="row">
+                <div class="col-sm-6" *ngIf="roleName != 'Admin'">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Power Utility<span
+                                class="text-danger">*</span>
+                            :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" readonly
+                                onkeypress="return /[0-9]/i.test(event.key)" formControlName="powerUtility" fullWidth
+                                placeholder="Power Utility">
+                            <div *ngIf="f.powerUtility.touched && f.powerUtility.invalid" class="alert alert-danger">
+                                <div *ngIf="f.powerUtility.errors?.required">Please enter power Utility</div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6" *ngIf="roleName == 'Admin'">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Power Utility<span
+                                class="text-danger">*</span>
+                            :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" readonly onkeypress="return /[0-9]/i.test(event.key)"
+                                formControlName="powerUtility" fullWidth placeholder="Power Utility">
+                            <div *ngIf="f.powerUtility.touched && f.powerUtility.invalid" class="alert alert-danger">
+                                <div *ngIf="f.powerUtility.errors?.required">Please enter power Utility</div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Is Sanction Load :</label>
+                        <div class="col-sm-8">
+                            <nb-checkbox status="basic" (change)="checkValue($event.target.value)" formControlName="isSanctionLoad"></nb-checkbox>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-sm-6" >
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Meter Owner :</label>
+                        <div class="col-sm-8">
+                            <nb-select placeholder="Meter Owner" formControlName="meterOwnerCode" fullWidth>
+                                <nb-option *ngFor="let item of meterOwnerLists"
+                                    [value]="item.id">{{item.name}}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Max Power<span
+                                class="text-danger">*</span>
+                            :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" [readOnly]="this.disable"  formControlName="maxPower" fullWidth
+                                placeholder="Max Power" onkeypress="return /[0-9]/i.test(event.key)" max="79"
+                                maxlength="2">
+                            <div *ngIf="f.maxPower.touched && f.maxPower.invalid" class="alert alert-danger">
+                                <div *ngIf="f.maxPower.errors?.required">Please enter Max power</div>
+                                <div *ngIf="f.maxPower.errors?.max">Max power must be less than 80.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-sm-4"></div>
+                        <div class="col-sm-8">
+                            <!-- <button class=" btn btnsave" [disabled]="this.posttopreform.invalid" (click)="save()">Save</button> -->
+                            <button class=" btn btnsave" [disabled]="!posttopreform.valid"
+                                (click)="save()">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>

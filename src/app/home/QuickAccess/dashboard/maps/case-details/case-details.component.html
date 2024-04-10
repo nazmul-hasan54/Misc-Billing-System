@@ -1,0 +1,92 @@
+<div fxLayout="column" fxLayoutGap="5%">
+    <div  fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
+        <div fxLayout="row" fxFlex="80">
+            <mat-icon class="receipt-icon" >receipt</mat-icon>
+    <!-- <h2 mat-dialog-title> Case Details</h2> -->
+            <ngx-generic-header title="Case Details"></ngx-generic-header>
+        </div>
+        <button mat-icon-button type="button" class="close-btn" (click)="close()" >
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+
+
+<div fxLayout="column" fxLayoutGap="3%">
+    <mat-card class="card mat-elevation-z" fxLayout="row" fxLayoutAlign="start center">
+    <mat-label fxFlex='18%' fxFlex.lg="20%" fxFlex.md="25%" fxFlex.sm="25%" fxFlex.xs="33%"><b>Site Nbr :</b> {{data.case.siteId}}</mat-label>
+    <div class="verticalD" fxFlex='5' fxFlex.lg="3%"></div>
+    <mat-label>{{data.case.siteName}}</mat-label>
+    </mat-card>
+
+    <div class="table1">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z">
+
+            <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+
+            <!-- caseId Column -->
+            <ng-container matColumnDef="caseId">
+                <th mat-header-cell *matHeaderCellDef class="styleH"> Case Id </th>
+                <!-- <td mat-cell *matCellDef="let element"> {{element.caseId}} </td> -->
+            </ng-container>
+
+            <!-- alarmSetDate Column -->
+            <ng-container matColumnDef="alarmSetDate">
+                <th mat-header-cell *matHeaderCellDef class="styleH thData"> Alarm Set Date </th>
+                <!-- <td mat-cell *matCellDef="let element"> {{element.alarmSetDate}} </td> -->
+            </ng-container>
+
+            <!-- contractor Column -->
+            <ng-container matColumnDef="contractor">
+                <th mat-header-cell *matHeaderCellDef class="styleH"> Contractor </th>
+                <!-- <td mat-cell *matCellDef="let element"> {{element.contractor}} </td> -->
+            </ng-container>
+
+            <!-- acknowledgeDate Column -->
+            <ng-container matColumnDef="acknowledgeDate">
+                <th mat-header-cell *matHeaderCellDef class="styleH"> Acknowledge Date </th>
+                <!-- <td mat-cell *matCellDef="let element"> {{element.acknowledgeDate}} </td> -->
+            </ng-container>
+        <div>
+
+
+        <ng-container matColumnDef="alarmDescription">
+            <th mat-header-cell *matHeaderCellDef [attr.colspan]="2" class="styleH"> Alarm Description </th>
+            <td mat-cell *matCellDef="let element" [attr.colspan]="2" >
+            
+                <div > <b>{{element.caseId }}</b> <span class="tdData">{{element.alarmSetDate}}</span></div> 
+                
+                <br>    
+                <div>{{element.alarmDescription}}</div>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="contractNbr">
+            <th mat-header-cell *matHeaderCellDef class="styleH"> Contract Nbr </th>
+            <td mat-cell *matCellDef="let element">
+                <div>{{element.contractor}}</div>
+                <br>
+                {{element.contractNbr}} 
+                </td>
+        </ng-container>
+        <ng-container matColumnDef="alarmClearDate">
+            <th mat-header-cell *matHeaderCellDef class="styleH"> Alarm Clear Date </th>
+            <td mat-cell *matCellDef="let element">
+                <div class="tdData1">{{element.acknowledgeDate}}</div>
+                <br>
+                {{element.alarmClearDate}} 
+                </td>
+        </ng-container>
+        </div>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+
+            <tr mat-row *matRowDef="let row; columns: displayedColumns2;" ></tr>
+            
+        </table>
+    </div>
+</div>
+    
+
+</div>

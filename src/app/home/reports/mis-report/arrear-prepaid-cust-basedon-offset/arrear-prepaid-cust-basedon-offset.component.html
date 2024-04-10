@@ -1,0 +1,160 @@
+<div class="row" *ngIf="isTrue == false">
+    <div class="col-md-12">
+        <form [formGroup]="arrearPrepaidForm" (ngSubmit)="onReport()">
+            <nb-card status="basic">
+                <nb-card-header>Prepaid & Stop Customer Arrear - Based On Offset</nb-card-header>
+
+                <nb-card-body >
+                    <div class="row m-1 p-1">
+                        <div class="col-sm-2">
+                            <label class="col-form-label">Center<span class="text-danger">*</span> </label>
+                        </div>
+                        <div class="col-sm-6">
+                            <nb-select multiple fullWidth placeholder="Please Select Center" formControlName="centerCode" (selectedChange)="onSelect($event)">
+                                <nb-option *ngFor="let item of allCenter" [value]="item.code" >{{item.dbName}}</nb-option>
+                            </nb-select>
+                            <div *ngIf="(submitted && arrearPrepaidForm.get('centerCode').hasError('required')) || (arrearPrepaidForm.get('centerCode').hasError('required') && arrearPrepaidForm.get('centerCode').touched)" class="text-danger" padding>
+                                <div>Center is required!</div>
+                            </div>
+                        </div>
+                    </div>
+                  
+                    <div class="row m-1 p-1">
+                        <div class="col-sm-2">
+                            <label class="col-form-label">Location Code </label>
+                        </div>
+                        <div class="col-sm-6">
+                        <nb-select multiple fullWidth placeholder="Please Select Location Code" formControlName="location" (selectedChange)="locationChange($event)">
+                            <nb-option *ngFor="let item of locationData" [value]="item.code">{{item.code}}&nbsp;({{item.name}})</nb-option>
+                        </nb-select>
+                        </div>
+                    </div>
+                    
+                    <div class="row m-1 p-1">
+                        <div class="col-sm-2">
+                            <label class="col-form-label">Consumer Number (8 digits)</label>
+                        </div>
+                        <div class="col-md-6">
+                        <input  type="text" class="no-spin" nbInput fullWidth status="basic" placeholder="" formControlName="consumerNo">
+                        </div>
+                    </div>
+
+                    <div class="row m-1 p-1">
+                        <div class="col-sm-2">
+                            <label class="col-form-label">Tariff</label>
+                        </div>
+                        <div class="col-sm-6">
+                        <nb-select fullWidth placeholder="" formControlName="tariff">
+                            <nb-option disabled selected></nb-option>
+                           <nb-option *ngFor="let item of tariff" [value]="item.text">{{item.text}}</nb-option>
+                        </nb-select>
+                        </div>
+                    </div>
+                    <div class="row m-1 p-1">
+                        <div class="col-sm-2">
+                            <label class="col-form-label">Arrear From (Tk)</label>
+                        </div>
+                        <div class="col-md-6">
+                        <input  type="number" class="no-spin" nbInput fullWidth status="basic" placeholder="" formControlName="arrearFrom">
+                        </div>
+                    </div>
+                    <div class="row m-1 p-1">
+                        <div class="col-sm-2">
+                            <label class="col-form-label">Arrear To (Tk)</label>
+                        </div>
+                        <div class="col-md-6">
+                        <input  type="number" class="no-spin" nbInput fullWidth status="basic" placeholder="" formControlName="arrearTo">
+                        </div>
+                    </div>
+                    <div class="row m-1 p-1">
+                        <div class="col-sm-2">
+                            <label class="col-form-label">Status</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <nb-select fullWidth placeholder="" formControlName="status">
+                                <nb-option *ngFor="let item of statusDataList" [value]="item.id">{{item.text}}</nb-option>
+                            </nb-select>
+                        </div>
+                </div> 
+                    <!-- <div class="row m-1 p-1">
+                        <div class="col-sm-2">
+                            <label class="col-form-label">Report Type</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <nb-select fullWidth placeholder="" formControlName="reportType">
+                                <nb-option *ngFor="let item of reportTypeList" [value]="item.id">{{item.text}}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>  -->
+                    <div class="row m-1 p-1">
+                        <div class="col-md-2">
+                            <label for="considerAll" class="col-form-label ">Consider All</label>
+                        </div>
+                        <div class="col-md-6">
+                          <nb-checkbox status="basic"  formControlName="isAll"></nb-checkbox>
+                        </div>
+                    </div>
+                    <div class="row m-1 p-1" *ngIf="arrearPrepaidForm.controls['isAll'].value == false">
+                      <label for="considerAll" class="col-form-label col-md-2">Consider Principal</label>
+                      <div class="col-md-6">
+                        <nb-checkbox status="basic" formControlName="isPrn"></nb-checkbox>
+                      </div>
+                    </div> 
+                    <div class="row m-1 p-1"  *ngIf="arrearPrepaidForm.controls['isAll'].value == false">
+                      <label for="considerAll" class="col-form-label col-md-2">Consider Lps</label>
+                      <div class="col-md-6">
+                        <nb-checkbox status="basic" formControlName="isLps"></nb-checkbox>
+                      </div>
+                    </div>
+                    <div class="row m-1 p-1"  *ngIf="arrearPrepaidForm.controls['isAll'].value == false">
+                      <label for="considerAll" class="col-form-label col-md-2">Consider Vat</label>
+                      <div class="col-md-6">
+                        <nb-checkbox status="basic" formControlName="isVat"></nb-checkbox>
+                      </div>
+                    </div>
+                    <div class="row m-1 p-1">
+                        <div class="col-sm-2">
+                            <label class="col-form-label">Order By</label>
+                        </div>
+                        <div class="col-sm-6">
+                        <nb-select fullWidth placeholder="" formControlName="orderBy">
+                            <nb-option *ngFor="let item of orderTypeList" [value]="item.id">{{item.text}}</nb-option>
+                        </nb-select>
+                        </div>
+                    </div>
+
+                </nb-card-body>
+                <!-- <nb-card-footer>
+                    <button *ngIf="isProgress==false" type="submit" nbButton status="success">  Generate Report </button>
+                    <button *ngIf="isProgress" type="submit" nbButton status="success" disabled>
+                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                      Generating...
+                    </button>
+                </nb-card-footer> -->
+                
+                <nb-card-footer>
+                    <button *ngIf="isLoading == false" type="submit" nbButton status="success">  Generate Report </button>
+                    <button *ngIf="isLoading == true" type="submit" nbButton status="success" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Generating...
+                      </button>
+                </nb-card-footer>
+            </nb-card>
+        </form>
+    </div>
+</div>
+
+
+<div *ngIf="isTrue==true && report !=''">
+    <div class="row">
+      <div class="col-sm-12 d-flex justify-content-end pb-2">
+        <nb-select placeholder="Export Type" (selectedChange)="onChangeExportType($event)">
+          <nb-option *ngFor="let exportType of exportTypeList" [value]="exportType.id">{{exportType.name}}</nb-option>
+        </nb-select> &nbsp;
+        <button nbButton status="info" (click)="onSearchAgain()">Search Again </button>
+        <!-- <button *ngIf="isLoading" nbButton status="warning" (click)="onSearchAgain()"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Generating Excel..</button> -->
+      </div>
+    </div>
+    <ngx-pdf-viewer [report]="report" [documentTitle]="documentTitle"></ngx-pdf-viewer>
+  </div>
+  

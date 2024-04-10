@@ -1,0 +1,44 @@
+<div fxLayout="column" fxLayoutGap="5px" class="dialog-container bg-white p-1">
+    <nb-card-header class="header-section">{{title}}</nb-card-header>
+    <hr class="hr-vertical">
+    <form [formGroup]="extendDateForm">
+        <!-- <div class="row m-1 p-1">
+            <div class="col-sm-4">
+                <label class="col-form-label float-right font-weight-bold">Bill Number :</label>
+            </div>
+            <div class="col-sm-8">
+                <input type="number" class="form-control" fullWidth nbInput readonly formControlName="billNumber" >
+            </div>
+        </div>
+
+        <div class="row m-1 p-1">
+            <div class="col-sm-4">
+                <label class="col-form-label float-right font-weight-bold">Customer Number :</label>
+            </div>
+            <div class="col-sm-8">
+                <input type="number" class="form-control" fullWidth nbInput readonly formControlName="customerNumber">
+            </div>
+        </div> -->
+
+        <div class="row m-1 p-1">
+            <div class="col-sm-4">
+                <label class="col-form-label float-right font-weight-bold">Update Date :</label>
+            </div>
+            <div class="col-sm-8">
+                <input nbInput placeholder="Select Date" formControlName="uDate" (ngModelChange)="updateDateChange($event)" fullWidth
+                    [nbDatepicker]="toDate" >
+                <nb-datepicker #toDate [min]="minDate"></nb-datepicker>
+            </div>
+        </div>
+    </form>
+
+    <div class="row m-1 p-1">
+        <div class="col-sm-4">
+        </div>
+        <div class="col-sm-4">
+            <button *ngIf="extendFor == 1" class="btn btn-success  btn-block" (click)="updateDate()">Update Date</button>
+            <button *ngIf="extendFor == 2" class="btn btn-success  btn-block" (click)="updateDateForInstalment()">Update Date</button>
+        </div>
+    </div>
+
+</div>

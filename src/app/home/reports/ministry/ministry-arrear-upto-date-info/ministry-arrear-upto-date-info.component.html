@@ -1,0 +1,59 @@
+<div class="row">
+    <div class="col-12">
+        <form [formGroup]="ministryForm" (ngSubmit)="onReprt()">
+            <nb-card>
+                <nb-card-header>
+                    <h6>Ministry Arrear and Receipt Up to date Info</h6>
+                </nb-card-header>
+                <nb-card-body>
+                    <!-- <div class="row m-1 p-1">
+                        <label for="billMonth" class="col-form-label col-md-2">Bill Month</label>
+                        <div class="col-md-6">
+                            <input 
+                                type="text" fullWidth
+                                formControlName="billMonth"
+                                nbInput
+                                [bsConfig]="{
+                                minMode: 'month',
+                                dateInputFormat: 'MMM-YYYY',
+                                isAnimated: true,
+                                containerClass: 'theme-default'
+                                }"
+                                #dp="bsDatepicker"
+                                bsDatepicker
+                                (keypress)="space($event)"
+                                placeholder="Enter Bill Month" maxlength="8"
+                            />
+                        </div>
+                    </div> -->
+
+                    <div class="row m-1 p-1">
+                        <label for="billMonth" class="col-form-label col-md-2">Bill Month</label>
+                        <div class="col-md-6">
+                            <input nbInput placeholder="Please a Pick Date" [nbDatepicker]="dateTimePicker" format="dd.MM.yyyy" fullWidth formControlName="billMonth">
+                            <nb-datepicker #dateTimePicker></nb-datepicker>
+                        </div>
+                    </div>
+                </nb-card-body>
+                <nb-card-footer>
+                    <button type="submit" nbButton status="success">GENERATE REPORT</button>
+                </nb-card-footer>
+            </nb-card>
+        </form>
+    </div>
+</div>
+
+
+<div >
+    <div class="row">
+        <div class="col-sm-12 d-flex justify-content-end pb-2">
+            <nb-select placeholder="Export Type" (selectedChange)="onChangeExportType($event)">
+                <nb-option *ngFor="let exportType of exportTypeList"
+                    [value]="exportType.id">{{exportType.name}}</nb-option>
+            </nb-select> &nbsp;
+            <button type="submit" nbButton status="info" (click)="onSearchAgain()">Search Again </button>
+
+        </div>
+    </div>
+    <ngx-pdf-viewer [report]="report" [documentTitle]="documentTitle"></ngx-pdf-viewer>
+</div>

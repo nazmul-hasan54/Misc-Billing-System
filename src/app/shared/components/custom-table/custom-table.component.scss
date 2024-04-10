@@ -1,0 +1,68 @@
+//@import '../../../QuickAccess/maintenance/components/schedule-creation/schedule-creation.component.scss';
+
+
+table {
+    width: 100%;
+   //  th,td{
+   //     width: auto;
+   //  }
+   }
+   th.mat-header-cell{
+      font-size: 16px;
+    }
+   th.mat-header-cell, td.mat-cell, td.mat-footer-cell{
+      border-bottom-style: none;
+      border-bottom-width: 0px;
+   }
+   
+//    nb-card-body {
+//     display: flex;
+//   }
+
+
+// This is used for maintenance schedule creation table
+// .maintScheduleCreationCard{
+//  width: 100%;
+//  overflow-x: auto;
+//  th{
+//    font-size: 16px;
+//  }
+//  }
+
+// .maintScheduleCreationCard table th,
+// .maintScheduleCreationCard table td{
+//   padding:5px 16px;
+//   //vertical-align: top;
+// }
+
+// .maintScheduleCreationCard table{
+//    th:nth-child(1){
+//      width: 25%;
+//    }
+//    th:nth-child(2){
+//      width: 45%;
+//    }
+//    th:nth-child(3){
+//      width: 25%;
+//    }
+
+//    td:nth-child(1){
+//           width: 25%;
+//         }
+//    td:nth-child(2){
+//       width: 45%;
+//    }
+//    td:nth-child(3){
+//       width: 25%;
+//    }
+//      .mat-header-row{
+//     background-color: #e6efff;
+//   }
+//   .mat-row:nth-child(even){
+//     background-color: #f9fafa;
+//   }
+        
+//   .mat-row:nth-child(odd){
+//     background-color:  #ffffff;
+//   }
+// }

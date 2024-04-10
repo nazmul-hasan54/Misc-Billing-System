@@ -1,0 +1,69 @@
+<nb-card *ngIf="isTrue == false">
+    <nb-card-header class="header-section">Ministry Ledger</nb-card-header>
+    <nb-card-body>
+         <form [formGroup]="ministryLedgerForm"  (ngSubmit)="onReport()">
+
+            <div class="form-group row">
+                <label for="billMonth" class="col-form-label col-md-2">Bill Month</label>
+                <!-- <div class="col-sm-4">
+                    <input nbInput placeholder="Pick Date" [nbDatepicker]="dateTimePicker" format="dd.MM.yyyy" fullWidth formControlName="billMonth">
+                    <nb-datepicker #dateTimePicker></nb-datepicker>
+                    <div *ngIf="(submitted && ministryLedgerForm.get('billMonth').hasError('required')) || (ministryLedgerForm.get('billMonth').hasError('required')&&ministryLedgerForm.get('billMonth').touched)" class="text-danger" padding>
+                        <div>Please Enter Bill Month</div>
+                    </div>
+                </div> -->
+                <div class="col-md-4">
+                    <input 
+                    type="text" fullWidth
+                    formControlName="billMonth"
+                    nbInput
+                    [bsConfig]="{
+                    minMode: 'month',
+                    dateInputFormat: 'MMM-YYYY',
+                    isAnimated: true,
+                    containerClass: 'theme-default'
+                    }"
+                    #dp="bsDatepicker"
+                    bsDatepicker
+                    (keypress)="space($event)"
+                    placeholder="Enter Bill Month" maxlength="8"/>
+                </div> 
+              </div>
+
+              <div class="buttons-row">
+                <button *ngIf="isProgress==false" type="submit" nbButton status="success">  Generate Report </button>
+                <button *ngIf="isProgress" type="submit" nbButton status="success" disabled>
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  Generating...
+                </button>
+              </div>
+
+            <!-- <div class="row m-1 p-1">
+                <div class="col-md-2"></div>
+                <div class="col-md-6">
+            
+                <button *ngIf="isProgress==false" type="submit" nbButton status="success"> Generate Report </button>
+                <button *ngIf="isProgress" type="submit" nbButton status="success" disabled>
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Generating...
+                </button>
+                </div>
+            </div> -->
+           
+         </form>
+    </nb-card-body>
+</nb-card>
+
+<div *ngIf="isTrue==true && report !=''">
+    <div class="row">
+        <div class="col-sm-12 d-flex justify-content-end pb-2">
+            <nb-select placeholder="Export Type" (selectedChange)="onChangeExportType($event)">
+                <nb-option *ngFor="let exportType of exportTypeList"
+                    [value]="exportType.id">{{exportType.name}}</nb-option>
+            </nb-select> &nbsp;
+            <button type="submit" nbButton status="info" (click)="onSearchAgain()">Search Again </button>
+
+        </div>
+    </div>
+    <ngx-pdf-viewer [report]="report" [documentTitle]="documentTitle"></ngx-pdf-viewer>
+</div>

@@ -1,0 +1,151 @@
+.receipt-icon {
+    font-size: 30px;
+    margin-right: 16px;
+    // float: left;
+  }
+  .close-btn .mat-icon {
+    color: black;
+    background-color: white;
+    font-size: 25px;
+  }
+  
+  .close-btn {
+    // float: right;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  // h2 {
+  //   float: left;
+  //   height: 26px;
+  //   margin-left: 3%;
+  // }
+  
+  .card {
+    // margin-top: 15%;
+    // margin-bottom: 3%;
+    background: rgba(189, 255, 239, 0.3);
+    color: #5e2d86;
+    border: none;
+  }
+  table {
+    width: 100%;
+  }
+  .mat-header-cell {
+    font-size: 16px;
+    font-weight: 500;
+    border-right: 1px solid #e0dde5;
+    padding-left: 5px;
+  }
+  
+  th.mat-header-cell:last-of-type,
+  td.mat-cell:last-of-type,
+  td.mat-footer-cell:last-of-type {
+    border-right: none;
+  }
+  
+  .mat-cell {
+    padding-top: 15px;
+    padding-left: 5px;
+    border-bottom: none;
+  }
+  
+  .verticalD {
+    border-left: 2px ridge rgba(0, 0, 0, 0.12);
+    height: 20px;
+  }
+  
+  .styleH {
+    background: rgba(234, 221, 255, 0.3);
+    color: #000000;
+  }
+  
+  .tdData {
+    margin-left: 10%;
+  }
+  
+  .tdData1 {
+    margin-bottom: 9%;
+  }
+  
+  @media screen and (max-width: 599px) {
+    table {
+      th,
+      td {
+        padding: 7px 9px;
+      }
+    }
+  
+  
+    .table1 {
+      overflow-x: auto;
+    }
+    .thData {
+      text-align: center;
+    }
+    .tdData {
+      margin-left: 3%;
+    }
+  
+    .tdData1 {
+    margin-bottom: 0%;
+  }
+  }
+  @media screen and (min-width: 600px) and (max-width: 959px) {
+    table {
+      th,
+      td {
+        padding: 7px 9px;
+      }
+    }
+  
+    .table1 {
+      overflow-x: auto;
+    }
+  
+    .thData {
+      text-align: center;
+    }
+    .tdData {
+      margin-left: 3%;
+    }
+  }
+  @media screen and (min-width: 960px) and (max-width: 1279px) {
+    table {
+      th,
+      td {
+        padding: 7px 9px;
+      }
+    }
+  
+    .table1 {
+      overflow-x: auto;
+    }
+  
+    .thData {
+      text-align: center;
+    }
+    .tdData {
+      margin-left: 3%;
+    }
+  }
+  
+  @media screen and (min-width: 1280px) and (max-width: 1919px) {
+    table {
+      th,
+      td {
+        padding: 7px 9px;
+      }
+    }
+  
+    .table1 {
+      overflow-x: auto;
+    }
+  
+    .thData {
+      text-align: center;
+    }
+  }
+  

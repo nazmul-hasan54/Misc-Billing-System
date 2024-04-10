@@ -1,0 +1,22 @@
+export interface MrsGenarateModel {
+    meterReadingId:number; 
+    readingId:number;
+    custId:number;
+    customerNum:string;
+    customerName:string;
+    walkSequence:string;
+    meterNumber:string;
+    todCode:string;
+    todDesc:string;
+    timeCycleCode:string;
+    timeCycleDesc:string;
+    readingTypeCode:String;
+    readingDescr:string;
+    presentReading:string;
+    openReading:string;
+    advance:string;
+    meterCondition:string;
+    powerFactor:string;
+    status:number;
+    billCycleCode:string;
+}

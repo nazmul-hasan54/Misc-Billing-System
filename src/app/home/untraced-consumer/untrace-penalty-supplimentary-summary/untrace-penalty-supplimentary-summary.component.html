@@ -1,0 +1,49 @@
+<nb-card>
+    <nb-card-header class="header-section">Untrace Penalty Supplimentary Report</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="form" (ngSubmit)="onReport()">
+            <div class="row">
+              
+                <div class="col-sm-12">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-2 col-form-label">Report Date</label>
+                        <div class="col-sm-6">
+                            <input type="text" fullWidth formControlName="billMonth" nbInput [bsConfig]="{
+                                                                                            minMode: 'month',
+                                                                                            dateInputFormat: 'MMM-YYYY',
+                                                                                            isAnimated: true,
+                                                                                            containerClass: 'theme-default'
+                                                                                            }" #dp="bsDatepicker" bsDatepicker
+                              (keypress)="space($event)" placeholder="Enter Bill Month" maxlength="8" />
+                            <div *ngIf="(submitted && form.get('billMonth').hasError('required')) || (form.get('billMonth').hasError('required')&& form.get('billMonth').touched)" class="text-danger" padding>
+                                <div>Please Enter Report Date</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="buttons-row">
+                <button *ngIf="isProgress==false" type="submit" nbButton status="success">  Generate Report </button>
+                <button *ngIf="isProgress" type="submit" nbButton status="success" disabled>
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Generating...
+                </button>
+            </div>
+    </form>
+    </nb-card-body>
+  </nb-card>
+  
+  <div *ngIf="report !=''">
+    <div class="row" >
+      <div class="col-sm-12 d-flex justify-content-end pb-2">
+        <nb-select placeholder="Export Type" (selectedChange)="onChangeExportType($event)">
+          <nb-option *ngFor="let exportType of exportTypeList" [value]="exportType.id">{{exportType.name}}</nb-option>
+        </nb-select> &nbsp;
+        <button type="submit" nbButton status="info" (click)="onSearchAgain()">Search Again </button>
+      </div> 
+    </div>
+    <ngx-pdf-viewer [report]="report" [documentTitle]="documentTitle"></ngx-pdf-viewer>
+  </div>
+  
+  
+  

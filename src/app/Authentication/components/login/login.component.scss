@@ -1,0 +1,269 @@
+
+
+.login {
+   height: 100%;
+   width: 100%;
+  
+}
+//for mobile
+@media (max-width: 480px) {
+   .body {
+   background-image: url('../../../../assets/images/bpdplogIn.jpg');
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: 100% 100%;
+      object-fit: cover;
+      
+      display: block;
+   }
+}
+
+//for tablet
+@media (min-width: 481px) and (max-width: 1024px) {
+
+      .body {
+            background-image: url('../../../../assets/images/bpdplogIn.jpg');
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+            object-fit: cover;
+          
+            display: block;
+      }
+}
+
+//for desktop
+@media (min-width: 1025px) {
+ .body {
+      background-image: url('../../../../assets/images/bpdplogIn.jpg');
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: 100% 100%;
+      object-fit: cover;
+     
+      display: block;
+   }
+}
+
+
+
+.main-div mat-card {
+   margin-right: 122px;
+   padding: 40px;
+   background-color: #ffffff;
+   margin-top: 60PX;
+}
+.login-form {
+   padding: 20px;
+  // margin-top: 20%;
+
+}
+
+
+.bgimg {
+   background-image: url('../../../../assets/images/bpdplogIn.jpg');
+   width: 100%;
+   height: 100%;
+   background-size:100% 100% ;
+   object-fit: cover;
+   display: block;
+   background-position: center center;
+   background-repeat: no-repeat;
+  background-attachment: fixed;
+   resize: both;
+}
+.login-button{
+   height: 40px;
+   font-family: 'Roboto', sans-serif;
+   font-size: 11px;
+   text-transform: uppercase;
+   letter-spacing: 2.5px;
+   font-weight: 500;
+  background-color: #2ab997;
+  color: #fff;
+  margin-top: 3rem;
+   border: none;
+   border-radius: 45px;
+   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+   transition: all 0.3s ease 0s;
+   cursor: pointer;
+   outline: none;
+}
+.login-button:hover{
+   background-color: #2EE59D;
+   box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+   color: #fff;
+   transform: translateY(-7px);
+}
+a.mat-button:hover{
+   background-color: white;
+   color: #000;
+   outline: none;
+}
+
+// .forgot-btn-div{
+//    margin-top: 6rem;
+//    margin-right: 5px;
+// }
+.submit-button{
+   padding-top: 3px;
+   width: 30%;
+   height: 42px;
+   font-family: 'Roboto', sans-serif;
+   font-size: 11px;
+   text-transform: uppercase;
+   letter-spacing: 2.5px;
+   font-weight: 500;
+   background-color: #2ab997;
+   color: #fff;
+   border: none;
+   border-radius: 45px;
+   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+   transition: all 0.3s ease 0s;
+   cursor: pointer;
+   outline: none;
+}
+// .cancel-button{
+//    width: 30%;
+//    height: 42px;
+//    font-family: 'Roboto', sans-serif;
+//    font-size: 11px;
+//    text-transform: uppercase;
+//    letter-spacing: 2.5px;
+//    font-weight: 500;
+//    background-color: #f5461a;
+//    color: #fff;
+//    border: none;
+//    border-radius: 45px;
+//    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+//    transition: all 0.3s ease 0s;
+//    cursor: pointer;
+//    outline: none;
+// }
+.mat-card > :first-child,
+.mat-card-content > :first-child {
+   margin-top: 5rem;
+}
+
+
+.icon_margin {
+   margin-top: -15px;
+   margin-left: 0%;
+   text-align: justify;
+}
+
+
+   
+.mat_divider {
+   margin-left: 70px;
+   height: 30px;
+   margin-bottom: 1rem;
+}
+.divider-height{
+   height: 20px;
+}
+.m-top{
+   margin-top: 7px;
+}
+
+ngx-no-column-layout {
+   ::ng-deep nb-layout-column {
+      padding: 0 !important;
+   }
+}
+
+
+
+@media (max-width:499px) {
+   .main-div mat-card {
+      margin: 10px;
+      padding: 0px;
+      width: 100vw;
+      height: 100vh;
+     font-size: 3vw;
+   }
+ 
+   .login-form {
+      padding: 20px;
+     // margin-top: 20%;
+   
+   }
+   
+  
+}
+
+@media(max-width:960px) {
+   .main-div mat-card {
+      margin: 15px;
+      padding: 0px;
+      width: 100vw;
+      height: 100vh;
+   }
+   .login-form {
+      padding: 20px;
+     // margin-top: 20%;
+   
+   }
+  
+}
+
+@media(max-width:1280px) {
+   .main-div mat-card {
+      //margin: 15px;
+      padding: 0px;
+      width: 100vw;
+      height: 100vh;
+   }
+   .login-form {
+      padding: 20px;
+     // margin-top: 20%;
+   
+   }
+  
+}
+
+@media (min-width:1281px) {
+   .main-div mat-card {
+      // margin: 15px;
+      padding: 0px;
+      width: 100vw;
+      height: 80vh;
+   }
+   .login-form {
+      padding: 20px;
+     // margin-top: 20%;
+   
+   }
+  
+}
+
+// .otp-time-left{
+//    text-align: center;
+//    margin-top: 4rem;
+//    font-size: 18px;
+//    font-weight: 400;
+//    font-style: normal;
+//    font-family: 'Roboto';
+// }
+
+// .otp-time-out{
+//    text-align: center;
+//    margin-top: 20px;
+//    text-align: center;
+//    font-size: 18px;
+//    font-weight: 400;
+//    font-style: normal;
+//    font-family: 'Roboto';
+// }
+
+// .otp-time-out a.mat-button{
+//    font-size: 18px !important;
+//    color: #2ab997 !important;
+// }
+
+// :host ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+//    stroke: #fff!important;
+// }

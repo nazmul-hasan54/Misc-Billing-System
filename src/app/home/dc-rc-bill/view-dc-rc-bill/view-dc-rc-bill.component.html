@@ -1,0 +1,171 @@
+<nb-card>
+    <nb-card-header class="header-section">List Of Consumer DC/RC Bill</nb-card-header>
+    
+    <nb-card-body>
+        <form [formGroup]="searchDcRcBillForm">
+          <div *ngIf="isView">
+            <h2 class="form-header-section">Search</h2>
+            <hr class="hr-vertical">
+            <div class="row" *ngIf="roleName == 'Admin'">
+              <div class="col-sm-6">
+                <div class="form-group row">
+                  <label for="customerType" class="label col-sm-4 col-form-label">Location :</label>
+                  <div class="col-sm-8">
+                    <nb-select placeholder="Select locationName" formControlName="locationCode" fullWidth>
+                      <nb-option *ngFor="let item of locationList" [value]="item.locationCode">{{item.locationCode}}-{{item.locationDescription}}</nb-option>
+                    </nb-select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row" *ngIf="roleName!='Admin'">
+              <div class="col-sm-6">
+                <div class="form-group row">
+                  <label for="customerType" class="label col-sm-4 col-form-label">Location :</label>
+                  <div class="col-sm-8">
+                    <nb-select placeholder="Select locationName" formControlName="locationCode" fullWidth>
+                      <nb-option *ngFor="let item of locationFormSession"
+                        [value]="item.code">{{item.code}}-{{item.name}}</nb-option>
+                    </nb-select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Customer Number : </label>
+                        <div class="col-sm-8">
+                          
+                          <input  type="text" class="form-control" formControlName="customerNumber"  fullWidth placeholder="Customer Number">
+                        </div>
+                      </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Bill Number : </label>
+                        <div class="col-sm-8">
+                          
+                          <input  type="text" class="form-control" formControlName="billNumber"  fullWidth placeholder="Bill Number">
+                        </div>
+                      </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">NID Number :</label>
+                        <div class="col-sm-8">
+                          
+                          <input  type="text" class="form-control" formControlName="nidNumber"  fullWidth placeholder="NID Number">
+                        </div>
+                      </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group row">
+                      <label for="customerType" class="label col-sm-4 col-form-label">Due Date : </label>
+                      <div class="col-sm-8">
+                        <input nbInput placeholder="Due Date" formControlName="dueDate"  fullWidth [nbDatepicker]="formpicker">
+                            <nb-datepicker #formpicker ></nb-datepicker>
+                      </div>
+                    </div>
+              </div>
+              </div>
+
+              <div class="row mb-2">
+                <div class="col-sm-2">
+                </div>
+                <div class="col-sm-2">
+                    <button type="button" (click)="getDcRcBill()" class="btn btn-primary">
+                        <i class="fas fa-search"></i> Search
+                      </button>
+                </div>
+            </div>
+
+        <div class="wrapper wrapper-content animated fadeInRight">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="ibox">
+                <div class="ibox-content">
+                  <div class="table-responsive">
+                    <table
+                      datatable
+                      [dtOptions]="dtOptions"
+                      [dtTrigger]="dtTrigger"
+                      class="table table-striped table-bordered table-hover dataTables-example" 
+                      >
+                      <thead>
+                        <tr>
+                          <tr>
+                            <th style="width: 5%;">SN</th>
+                            <th style="width: 10%;">Bill Number</th>
+                            <th style="width: 10%;">Customer Number</th>
+                            <th style="width: 10%;">Customer Name</th>
+                            <th style="width: 5%;">Tariff</th>
+                            <th style="width: 10%;">Bill Amount</th>
+                            <th style="width: 10%;">DC Date</th>
+                            <th style="width: 10%;">Due Date</th>
+                            <th style="width: 10%;">Payment Date</th>
+                            <th style="width: 10%;">Reconnection Date</th>
+                            <th style="width: 20%;">Action</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let bill of dcRcbillList; let i =index">
+                          <th style="width: 5%;">{{i+1}}</th>
+                          <td style="width: 10%;">{{bill.billNumber}}</td>
+                          <td style="width: 10%;">{{bill.customerNumber}}</td>
+                          <td style="width: 10%;">{{bill.customerName}}</td>
+                          <td style="width: 5%;">{{bill.tariff}}</td>
+                          <td style="width: 10%;">{{bill.billAmount}}</td>
+                          <td style="width: 10%;">{{bill.dcDate | date}}</td>
+                          <td style="width: 10%;">{{bill.dueDate | date}}</td>
+                          <td style="width: 10%;">{{bill.paymentDate | date}}</td>
+                          <td style="width: 10%;">{{bill.rcDate | date}}</td>
+                          <td style="width: 10%;">
+                            <div class="row">
+                              <button *ngIf="bill.paid==0" (click)="editByBillNo(bill)" class="btn btn-sm btn-primary" >Edit</button>
+                              <button *ngIf="bill.paid==0" (click)="dateExtend(bill)" class="btn btn-sm btn-warning" >ExtendDate</button>
+                              <button *ngIf="bill.paid==0"   class="btn btn-sm btn-warning" (click)="paymnetGateway(bill)" >Payment</button>
+                              <button *ngIf="bill.paid==1 && bill.rcDate ==null"   class="btn btn-sm btn-primary" (click)="reconnect(bill)" >Reconnect</button>
+                              <button  class="btn btn-sm btn-success" (click)="viewPrint(bill)">Print</button>
+                          </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="isrcView">
+      
+        <div class="col-sm-6">
+          <div class="form-group row">
+              <label for="customerType" class="label col-sm-4 col-form-label">Reconnect Date :</label>
+              <div class="col-sm-8">
+                  <input nbInput placeholder="Due Date" format="dd.MM.yyyy" formControlName="rDate" fullWidth
+                      [nbDatepicker]="formpicker" (ngModelChange)="dueDateChange($event)">
+                  <nb-datepicker #formpicker [min]="minDate"></nb-datepicker>
+              </div>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2">
+      </div>
+      <div class="col-sm-2">
+        <button nbButton fullWidth status="success"(click)="save()" > Save </button>
+    </div>
+      </div>
+     
+
+      </div>
+      </form>
+    </nb-card-body>
+  </nb-card>

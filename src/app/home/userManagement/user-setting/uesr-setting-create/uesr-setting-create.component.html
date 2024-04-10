@@ -1,0 +1,76 @@
+<form [formGroup]="form" (ngSubmit)="form.valid && onSave()">
+    <div fxLayout="column" fxLayoutGap="20px">
+        <div class="col-margin1 " fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
+            <div fxLayout="row" fxFlex="80">
+                <mat-icon class="file-icon material-icons-outlined">insert_drive_file</mat-icon>
+                <ngx-generic-header title="User Create"></ngx-generic-header>
+            </div>
+
+            <button mat-icon-button type="button" class="close-btn" (click)="close()">
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+
+        <div fxLayout="column" fxLayoutGap="5px" class="form-group-section">
+            <div fxLayout="row" fxLayoutGap="25px" fxLayout.xs="row wrap" fxLayoutGap.xs="0px">
+                <div fxLayout="column" fxFlex="100%" fxFlex.lg="100%" fxFlex.md="100%" fxFlex.xs="100%">
+
+                    <mat-form-field appearance="outline" floatLabel="always">
+                        <mat-label> First Name</mat-label>
+                        <input type="text" matInput formControlName="firstName" placeholder="First Name">
+                        <mat-error>Please enter first name </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" floatLabel="always">
+                        <mat-label> Last Name</mat-label>
+                        <input type="text" matInput formControlName="lastName" placeholder="Last Name">
+                        <mat-error>Please enter last name </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" floatLabel="always" class="icon-suffix">
+                        <mat-label> User Name</mat-label>
+                        <input type="text" matInput formControlName="userName" placeholder="User Name">
+                        <mat-icon *ngIf="showRefreshIcon" class="refresh-icon" type="button"
+                            (click)="checkUserNameExists()" matSuffix>refresh</mat-icon>
+                        <mat-icon *ngIf="showNotExistUserName" class="right-mark" matSuffix>check_circle</mat-icon>
+                        <mat-icon *ngIf="showExistUserName" class="cross-mark" matSuffix>cancel</mat-icon>
+                        <span *ngIf="!showRetrieving"></span>
+                        <mat-spinner *ngIf="showRetrieving" [diameter]="26" matSuffix></mat-spinner>
+                        <mat-error>Please enter user name </mat-error>
+                    </mat-form-field>
+                    <span *ngIf="showExistUserName" class="error-message">{{message.message}} </span>
+
+                    <mat-form-field appearance="outline" floatLabel="always">
+                        <mat-label> Email</mat-label>
+                        <input type="text" matInput formControlName="email" placeholder="Email">
+                        <mat-error *ngIf="form.get('email').hasError('required')">Please enter your email address
+                        </mat-error>
+                        <mat-error *ngIf="form.get('email').hasError('email')">Please enter your valid email address
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" floatLabel="always">
+                        <mat-label>User Role</mat-label>
+                        <mat-select placeholder="Select User Role" formControlName="roleId">
+                            <mat-option *ngFor="let role of roles" [value]="role.key">
+                                {{role.value}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>Please select a user role </mat-error>
+                    </mat-form-field>
+
+                </div>
+            </div>
+        </div>
+
+        <div fxLayout="column">
+            <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="15px" fxLayoutGap.xs="5px">
+                <button mat-button type="submit" class="btn-save" [class.spinner]="isLoading" [disabled]="isLoading">
+                    <mat-icon class="btn-icon" *ngIf="!isLoading">
+                        save
+                    </mat-icon> Save
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

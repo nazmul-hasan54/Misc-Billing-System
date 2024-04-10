@@ -1,0 +1,39 @@
+// .example-month-picker .mat-calendar-period-button {
+//     pointer-events: none;
+//   }
+  
+
+//   .example-month-picker .mat-calendar-arrow {
+//     display: none;
+//   }
+
+::ng-deep{
+    .theme-default .bs-datepicker-head {
+        background-color: #fff;
+        color: black !important;
+    }
+
+    .bs-datepicker-head button {
+        
+        color: rgb(26, 24, 24);
+     
+    }
+    .bs-datepicker-head button {
+        color: #1a1818;
+        font-weight: bold;
+    }
+
+  .example-month-picker .mat-calendar-arrow {
+    display: none;
+  }
+
+  .no-spin::-webkit-inner-spin-button, .no-spin::-webkit-outer-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+}
+
+.no-spin {
+    -moz-appearance:textfield !important;
+
+}
+}

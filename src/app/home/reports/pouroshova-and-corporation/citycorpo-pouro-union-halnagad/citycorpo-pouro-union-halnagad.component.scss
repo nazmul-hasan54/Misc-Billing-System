@@ -1,0 +1,115 @@
+@import "../../../../@theme/styles/themes";
+
+.btn-save {
+  background: #5e2d86;
+  color: white;
+  width: 100px;
+  height: 35px;
+}
+
+.date-lable {
+  margin-top: 20px;
+  margin-right: 20px;
+  font-weight: bold;
+}
+
+.btn-search {
+  background: #1d3e70;
+  color: white;
+  width: 150px;
+  height: 35px;
+}
+
+.rows {
+  display: flex;
+  flex-direction: row;
+}
+
+.btn-icon {
+  margin-right: 2px;
+  color: white;
+}
+
+.select-export {
+  width: 150px !important;
+  min-height: 35px !important;
+  color: white !important;
+  font-weight: bold;
+}
+
+.select-value {
+  font-weight: bold;
+}
+
+.btn-grp {
+  margin-bottom: 20px !important;
+}
+
+.form-group-section {
+  margin-bottom: 0% !important;
+}
+
+.anchorTag {
+  text-decoration: none;
+}
+
+@media screen and (max-width: 599px) {
+  .btn-icon {
+    font-size: 20px;
+    width: 20px;
+    margin-right: 0% !important;
+  }
+
+  .btn-save {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    padding-top: 1%;
+  }
+}
+
+.pdfView {
+  margin: 0px 20px;
+  padding: 10px 30px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(104, 99, 99, 0.6);
+}
+
+::ng-deep {
+  ngx-extended-pdf-viewer #viewerContainer {
+    overflow: auto !important;
+  }
+
+  @media (max-width: 755px) {
+    #outerContainer .hiddenSmallView,
+    #outerContainer .hiddenSmallView * {
+      display: block !important;
+    }
+  }
+
+  @media (max-width: 450px) {
+    // #outerContainer #toolbarViewerRight {
+    //   margin-left: -70px !important;
+    // }
+    #outerContainer .hiddenSmallView,
+    #outerContainer .hiddenSmallView * {
+      margin-right: 10px !important;
+      display: block !important;
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  .pdfView {
+    padding: 0;
+    border-radius: 5px;
+  }
+}
+
+::ng-deep {
+  .nb-theme-default [nbInput].shape-rectangle {
+    border-radius: 0.25rem;
+    background-color: #edf1f7 !important;
+  }
+}

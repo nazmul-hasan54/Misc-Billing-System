@@ -1,0 +1,29 @@
+<div fxLayout="column" fxLayoutGap="40px" fxLayoutAlign="space-between none">
+    <ngx-generic-header title="Buildings"></ngx-generic-header>
+
+    <mat-card fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start center" fxLayoutGap="20px"
+        fxLayoutAlign.xs="none none" class="form-card">
+        <mat-toolbar fxFlex="30" fxFlex.sm="40" fxFlex.xs="100%" fxLayoutAlign="start center" class="search-toolbar">
+            <mat-icon matPrefix class="search-icon">search</mat-icon>
+            <input matInput type="search" placeholder="Search By Title or SiteNbr or Postal..." class="search-input" fxFill [(ngModel)]="searchBy">
+        </mat-toolbar>
+        <button mat-button class="search-button" (click)="searchBuildingByBuildingTitle()">Search</button>
+        <button mat-fab class="iconPlus" type="button" (click)="addBuilding()">
+            <mat-icon>add</mat-icon>
+        </button>
+    </mat-card>
+
+    <mat-card class="building-table-card table-card">
+        <div class="loader-div"><ngx-table-loader [isCompleted] = "isLoading"></ngx-table-loader></div>
+        <ngx-custom-table-pagination 
+        [dataset]="buildingList" 
+        [columns]="columns"  
+        (onPageChange)="onPageChange($event)"
+        [total]="total"
+        (onDialogOpen)="editBuilding($event)" 
+        [currentPage]="currentPage"
+        [pageSize]="pageSize"  
+        >
+        </ngx-custom-table-pagination>
+    </mat-card>
+</div>

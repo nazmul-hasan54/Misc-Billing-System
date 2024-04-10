@@ -1,0 +1,53 @@
+<form [formGroup]="form" (ngSubmit)="form.valid && onSave()">
+    <div fxLayout="column" fxLayoutGap="20px">
+        <div class="col-margin1 " fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
+            <div fxLayout="row" fxFlex="80">
+                <mat-icon class="file-icon material-icons-outlined">insert_drive_file</mat-icon>
+                <ngx-generic-header title="Create Office Stuff Info"></ngx-generic-header>
+            </div>
+
+            <button mat-icon-button type="button" class="close-btn" (click)="close()">
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+
+        <div fxLayout="column" fxLayoutGap="5px" class="form-group-section">
+            <div fxLayout="row" fxLayoutGap="25px" fxLayout.xs="row wrap" fxLayoutGap.xs="0px">
+                <div fxLayout="column" fxFlex="100%" fxFlex.lg="100%" fxFlex.md="100%" fxFlex.xs="100%">
+
+                    <mat-form-field appearance="outline" floatLabel="always">
+                        <mat-label> Name</mat-label>
+                        <input type="text" matInput formControlName="officeStuffName" placeholder="Name">
+                        <mat-error>Please enter name </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" floatLabel="always">
+                        <mat-label> Designation</mat-label>
+                        <input type="text" matInput formControlName="designation" placeholder="Designation">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" floatLabel="always">
+                        <mat-label> Phone Number</mat-label>
+                        <input type="text" matInput formControlName="phone" placeholder="Phone Number">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" floatLabel="always">
+                        <mat-label> Email</mat-label>
+                        <input type="text" matInput formControlName="email" placeholder="Email">
+                    </mat-form-field>
+                    <div fxLayout="row" fxLayoutGap="20px" fxLayout.xs="row wrap" class="btn-grp">
+                        <mat-checkbox formControlName="isActive" >Is Active?
+                        </mat-checkbox>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div fxLayout="column">
+            <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="15px" fxLayoutGap.xs="5px">
+                <button mat-button type="submit" class="btn-save">
+                    <mat-icon class="btn-icon">
+                        save
+                    </mat-icon> Save
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

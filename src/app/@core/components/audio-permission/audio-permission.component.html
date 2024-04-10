@@ -1,0 +1,12 @@
+<div fxLayout="column" fxLayoutGap="5px" class="dialog-container">
+    <div mat-dialog-content class="dialog-content">
+       <mat-icon>volume_up</mat-icon>
+        <span class="description">{{message}}</span>
+    </div>
+    <mat-divider class="divider"></mat-divider>
+    <div mat-dialog-actions [align]="'end'" class="btn-div">
+        
+        <button mat-raised-button color="basic" (click)="onDismiss()" class="no-btn">Deny</button>
+        <button mat-raised-button color="basic"  (click)="onConfirm()" class="yes-btn">Allow</button>
+    </div>
+</div>

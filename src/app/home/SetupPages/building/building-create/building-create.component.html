@@ -1,0 +1,119 @@
+<form [formGroup]="form" (ngSubmit)="form.valid && onSave()">
+    <div fxLayout="column" fxLayoutGap="20px">
+        <div class="col-margin1 " fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
+            <div fxLayout="row" fxFlex="80">
+                <mat-icon class="file-icon material-icons-outlined">insert_drive_file</mat-icon>
+                <!-- <h2 mat-dialog-title> Feedback Form</h2> -->
+                <ngx-generic-header title="Building Create"></ngx-generic-header>
+            </div>
+
+            <button mat-icon-button type="button" class="close-btn" (click)="close()">
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+
+        <div fxLayout="column" class="form-group-section">
+            <div fxLayout="row" fxLayoutGap="30px" fxLayout.lt-md="column" fxLayout.xs="row wrap" fxLayoutGap.xs="5px">
+                <div fxFlex fxLayoutAlign="center center" fxFlexFill>
+                    <mat-form-field appearance="outline" floatLabel="always" fxFlex>
+                        <mat-label>Site Nbr</mat-label>
+                        <input type="text" matInput formControlName="siteNbr" placeholder="Site Nbr" required>
+                        <mat-error>Please enter Site Nbr</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex fxLayoutAlign="center center" fxFlexFill>
+                    <mat-form-field appearance="outline" floatLabel="always" fxFlex>
+                        <mat-label>Address Code</mat-label>
+                        <mat-select placeholder="Address Code" formControlName="addressCode" required>
+                            <mat-option *ngFor="let addressCode of addressCodeDdList"
+                                [value]="addressCode">
+                                {{ addressCode }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>Please select an address code </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex fxLayoutAlign="center center" fxFlexFill>
+                    <mat-form-field appearance="outline" floatLabel="always" fxFlex>
+                        <mat-label>Postal Code</mat-label>
+                        <input type="text" matInput formControlName="postalCode" placeholder="Postal Code" required>
+                        <mat-error>Please enter Postal Code</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div fxFlex fxLayoutAlign="center center" fxFlexFill>
+                <mat-form-field appearance="outline" floatLabel="always" fxFlex>
+                    <mat-label>Building Title</mat-label>
+                    <input type="text" matInput formControlName="buildingTitle" placeholder="Building Title" required>
+                    <mat-error>Please enter Building Title</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div fxFlex fxLayoutAlign="center center" fxFlexFill>
+                <mat-form-field appearance="outline" floatLabel="always" fxFlex>
+                    <mat-label>Address</mat-label>
+                    <textarea type="text" matInput formControlName="address" rows="2" placeholder="Address"
+                        required></textarea>
+                    <mat-error>Please enter Address</mat-error>
+                </mat-form-field>
+            </div>
+
+            <mat-divider class="gap30px"></mat-divider>
+
+            <div fxLayout="row" fxLayoutGap="30px" fxLayout.lt-md="column" fxLayout.xs="row wrap" fxLayoutGap.xs="5px">
+                <div fxFlex fxLayoutAlign="center center" fxFlexFill>
+                    <mat-form-field appearance="outline" floatLabel="always" fxFlex>
+                        <mat-label>Building Type</mat-label>
+                        <mat-select placeholder="Building Type" formControlName="buildingType">
+                            <mat-option *ngFor="let buildingType of buildingTypeDdList"
+                                [value]="buildingType">
+                                {{ buildingType }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>Please select a building type </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex fxLayoutAlign="center center" fxFlexFill>
+                    <mat-form-field appearance="outline" floatLabel="always" fxFlex>
+                        <mat-label>Asset No</mat-label>
+                        <input type="text" matInput formControlName="assetNo" placeholder="Asset No">
+                        <mat-error>Please enter Asset No</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="30px" fxLayout.lt-md="column" fxLayout.xs="row wrap" fxLayoutGap.xs="5px">
+                <div fxFlex fxLayoutAlign="center center" fxFlexFill>
+                    <mat-form-field appearance="outline" floatLabel="always" fxFlex>
+                        <mat-label>Lta Id</mat-label>
+                        <input type="text" matInput formControlName="ltaId" placeholder="Lta Id">
+                        <mat-error>Please enter Lta Id</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex fxLayoutAlign="center center" fxFlexFill>
+                    <mat-form-field appearance="outline" floatLabel="always" fxFlex>
+                        <mat-label>ISS Install Date</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="issInstallDate"
+                            placeholder="Sep 23, 2021"  required>
+                        <mat-error>Please select a date </mat-error>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+
+        <div fxLayout="column">
+            <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="15px" fxLayoutGap.xs="5px">
+                <button mat-button type="submit" class="btn-save" [class.btn-disable]="!form.valid" [disabled]="!form.valid">
+                    <mat-icon class="btn-icon"> save </mat-icon> Save
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

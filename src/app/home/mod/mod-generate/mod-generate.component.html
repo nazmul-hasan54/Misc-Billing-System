@@ -1,0 +1,39 @@
+<nb-card>
+    <nb-card-header class="header-section">MOD</nb-card-header>
+
+    <nb-card-body>
+        <h2 class="form-header-section">Customer Information</h2>
+        <hr class="hr-vertical">
+        
+        <form [formGroup]="modgenform">
+            <div class="row">
+
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="customerType" class="label col-sm-4 col-form-label">Customer Number<span
+                                class="text-danger">*</span> :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" 
+                                formControlName="customerNumber" (keydown)="getcustomerDetails($event)" fullWidth placeholder="Customer Number" onkeypress="return /[0-9]/i.test(event.key)" maxlength="8">
+                                
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="location" class="label col-sm-4 col-form-label">Location<span
+                            class="text-danger">*</span> :</label>
+                        <div class="col-sm-8">
+                        <nb-select [placeholder]="'--Select Location--'" formControlName="locationCode" fullWidth>
+                            <nb-option *ngFor="let location of locationList"
+                                value="{{location.locationCode}}">{{location.locationName}}</nb-option>
+                        </nb-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+          </nb-card-body>
+
+        </nb-card>

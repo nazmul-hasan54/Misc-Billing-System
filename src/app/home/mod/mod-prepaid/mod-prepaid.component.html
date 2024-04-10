@@ -1,0 +1,83 @@
+<nb-card *ngIf="isTrue==false">
+    <nb-card-header class="header-section">Mod Prepaid Report</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="miscellaneousForm" (ngSubmit)="onReport()">
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <div class="row m-1 p-1">
+                        <label for="deptCode" class="col-form-label col-md-2">Location</label>
+                        <div class="col-md-6">
+                            <nb-select hero *ngIf="this.roleName=='Admin'"
+                                fullWidth
+                                formControlName="deptCode"
+                                placeholder="Select Location"
+                                >
+                                <nb-option *ngFor="let item of deptList" [value]="item.deptCode" >{{item.code}} - {{item.name}}</nb-option>
+                            </nb-select>
+                            <nb-select hero *ngIf="this.roleName!='Admin'"
+                                fullWidth
+                                formControlName="deptCode"
+                                placeholder="Select Location"
+                                >
+                                <nb-option *ngFor="let item of locationFormSession" [value]="item.deptCode" >{{item.code}} - {{item.name}}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                    <div class="row m-1 p-1">
+                        <label for="billMonth" class="col-form-label col-md-2">Bill Month</label>
+                        <div class="col-md-6">
+                            <input type="text" fullWidth formControlName="billMonth" nbInput [bsConfig]="{ minMode: 'month', dateInputFormat: 'MMM-YYYY',
+                            isAnimated: true, containerClass: 'theme-default'}" #dp="bsDatepicker" bsDatepicker (keypress)="space($event)"
+                            placeholder="Enter Bill Month" maxlength="8"/>
+                        </div>
+                    </div>
+                    <!-- <div class="row m-1 p-1">
+                        <label for="fDate" class="col-form-label col-md-2">From Date</label>
+                        <div class="col-md-6">
+                            <input nbInput placeholder="Enter From Date" [nbDatepicker]="dateTimePicker"  format="dd.MM.yyyy" fullWidth formControlName="fDate">
+                            <nb-datepicker #dateTimePicker></nb-datepicker>
+                        </div>
+                    </div> -->
+                    <!-- <div class="row m-1 p-1">
+                        <label for="tDate" class="col-form-label col-md-2">To Date</label>
+                        <div class="col-md-6">
+                            <input nbInput placeholder="Enter To Date" [nbDatepicker]="dateTimePickerr"  format="dd.MM.yyyy" fullWidth formControlName="tDate">
+                            <nb-datepicker #dateTimePickerr></nb-datepicker>
+                        </div>
+                    </div> -->
+                </div>
+
+            </div>
+            <div class="buttons-row">
+                <button *ngIf="isProgress==false;" type="submit" nbButton status="success"> Generate Report </button>
+                <!-- <button  type="submit" nbButton status="success">  Generate Report </button> -->
+                <button *ngIf="isProgress" type="submit" nbButton status="success" disabled>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Generating...
+                </button>
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>
+<div *ngIf="isTrue==true && report !=''">
+    <nb-card fxLayout="row" fxLayout.xs="column" fxLayoutAlign="end center" fxLayoutGap="30px"
+        fxLayoutAlign.xs="none none">
+        <div class="row ">
+            <div class="col-sm-12">
+                <nb-select placeholder="Export Type" (selectedChange)="onChangeExportType($event)">
+                    <nb-option *ngFor="let exportType of exportTypeList"
+                        [value]="exportType.id">{{exportType.name}}</nb-option>
+                </nb-select> &nbsp;
+                <button type="submit" nbButton status="info" (click)="onSearchAgain()"> Search Again </button>
+
+            </div>
+        </div>
+
+    </nb-card>
+    <div>
+        <ngx-pdf-viewer [report]="report" [documentTitle]="documentTitle"></ngx-pdf-viewer>
+
+    </div>
+</div>
+

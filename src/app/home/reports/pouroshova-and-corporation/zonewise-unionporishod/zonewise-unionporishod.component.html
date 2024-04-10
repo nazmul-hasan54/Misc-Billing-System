@@ -1,0 +1,134 @@
+<nb-card *ngIf="isTrue==false">
+    <nb-card-header class="header-section">জোন অনুসারে ইউনিয়ন পরিষদ বকেয়া বিবরনী</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="form" (ngSubmit)="onReport()">
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <div *ngIf="this.roleName=='Admin'">
+                        <div class="form-group row">
+                            <label for="Center" class="label col-sm-2 col-form-label">Zone</label>
+                              <div class="col-sm-4">
+                                <nb-select hero fullWidth formControlName="zoneCode" (selectedChange)="getZoneWiseCircle($event)">
+                                    <nb-option value="0" >All</nb-option>
+                                  <nb-option *ngFor="let item of zoneDataList" [value]="item.code">{{item.name}}</nb-option>
+                                </nb-select>
+                            </div>
+                        </div>
+                
+                        <div class="form-group row" *ngIf="this.formCon.zoneCode.value>'0'">
+                            <label for="Center" class="label col-sm-2 col-form-label">Circle</label>
+                            <div class="col-sm-4" >
+                              <nb-select hero fullWidth formControlName="circleCode" (selectedChange)="onChangeSelectDb($event)">
+                                <nb-option value="0" >All</nb-option>
+                                <nb-option *ngFor="let item of circleList" [value]="item.code">{{item.name}}</nb-option>
+                              </nb-select>
+                            </div>
+                        </div>
+                
+                        <div class="form-group row"  *ngIf="this.formCon.circleCode.value>'0'">
+                            <label for="Center" class="label col-sm-2 col-form-label">Location</label>
+                              <div class="col-sm-4">
+                                <nb-select hero fullWidth formControlName="locationCode">
+                                    <nb-option value="0" >All</nb-option>
+                                  <nb-option *ngFor="let item of locationData" [value]="item.code">{{item.code}} - {{item.name}}</nb-option>
+                                </nb-select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div *ngIf="this.roleName!='Admin'">
+                        <div class="form-group row">
+                            <label for="Center" class="label col-sm-2 col-form-label">Zone</label>
+                              <div class="col-sm-4">
+                                <nb-select hero fullWidth formControlName="zoneCode" (selectedChange)="getCircleByUserNameZoneCode($event)">
+                                  <nb-option *ngFor="let item of zoneByUserList" [value]="item.code">{{item.name}}</nb-option>
+                                </nb-select>
+                            </div>
+                        </div>
+                
+                        <div class="form-group row" *ngIf="this.formCon.zoneCode.value>'0'">
+                            <label for="Center" class="label col-sm-2 col-form-label">Circle</label>
+                            <div class="col-sm-4" >
+                              <nb-select hero fullWidth formControlName="circleCode" (selectedChange)="getLocationByUserNameCircleCodes($event)">
+                                <nb-option *ngFor="let item of circleByUserZoneList" [value]="item.code">{{item.name}}</nb-option>
+                              </nb-select>
+                            </div>
+                        </div>
+                
+                        <div class="form-group row"  *ngIf="this.formCon.circleCode.value>'0'">
+                            <label for="Center" class="label col-sm-2 col-form-label">Location</label>
+                              <div class="col-sm-4">
+                                <nb-select hero fullWidth formControlName="locationCode">
+                                  <nb-option *ngFor="let item of locationByUserCircleList" [value]="item.code">{{item.code !='0' ?  '('+item.code+') -' : ""}} {{item.name}}</nb-option>
+                                </nb-select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="Center" class="label col-sm-2 col-form-label">Bill Month</label>
+                        <div class="col-md-4">
+                            <input 
+                            type="text" fullWidth
+                            formControlName="billMonth"
+                            nbInput
+                            [bsConfig]="{
+                            minMode: 'month',
+                            dateInputFormat: 'MMM-YYYY',
+                            isAnimated: true,
+                            containerClass: 'theme-default'
+                            }"
+                            #dp="bsDatepicker"
+                            bsDatepicker
+                            (keypress)="space($event)"
+                            placeholder="Enter Bill Month" maxlength="8"/>
+                        </div> 
+                    </div>
+                    <!-- <div class="form-group row">
+                        <label class="label col-sm-2 col-form-label">Report Date</label>
+                        <div class="col-sm-4">
+                            <input nbInput placeholder="Pick Date" [nbDatepicker]="dateTimePicker" format="dd.MM.yyyy"
+                                fullWidth formControlName="currentDate">
+                            <nb-datepicker #dateTimePicker></nb-datepicker>
+                            <div *ngIf="(submitted && form.get('currentDate').hasError('required')) || (form.get('currentDate').hasError('required')&&form.get('currentDate').touched)"
+                                class="text-danger" padding>
+                                <div>Please Enter Report Date</div>
+                            </div>
+                        </div>
+                    </div> -->
+                    
+                    <div class="form-group row">
+                            <label class="label col-sm-2 col-form-label">Report Type<span></span></label>
+                        <div class="col-sm-4">
+                            <nb-select hero fullWidth placeholder="" formControlName="reportType">
+                                <nb-option *ngFor="let item of reportType" [value]="item.key">{{item.value}}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="buttons-row">
+                <button *ngIf="isProgress==false" type="submit" nbButton status="success"> Generate Report </button>
+                <button *ngIf="isProgress" type="submit" nbButton status="success" disabled>
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Generating...
+                </button>
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>
+
+<div *ngIf="isTrue==true && report !=''">
+    <div class="row">
+        <div class="col-sm-12 d-flex justify-content-end pb-2">
+            <nb-select placeholder="Export Type" (selectedChange)="onChangeExportType($event)">
+                <nb-option *ngFor="let exportType of exportTypeList"
+                    [value]="exportType.id">{{exportType.name}}</nb-option>
+            </nb-select> &nbsp;
+            <button type="submit" nbButton status="info" (click)="onSearchAgain()">Search Again </button>
+
+        </div>
+    </div>
+    <ngx-pdf-viewer [report]="report" [documentTitle]="documentTitle"></ngx-pdf-viewer>
+</div>

@@ -1,0 +1,29 @@
+export interface PostpaidCustDetailsModel {
+    transID: string | null;
+    userName: string | null;
+    userPass: string | null;
+    contactName: string | null;
+    telephone: string | null;
+    mobile: string | null;
+    serviceProviders: string | null;
+    customerName: string | null;
+    customerNumber: string | null;
+    fatherName: string | null;
+    locationCode: string | null;
+    locationName: string | null;
+    customerType: string | null;
+    nID: string | null;
+    nidNumber: string | null;
+    mobileNumber: string | null;
+    customerAddress: string | null;
+    powerUtility: string | null;
+    maxPower: string | null;
+    meterOwnedBy: string | null;
+    meterOwner: string | null;
+    transferDate: string | null;
+    bookNo: string | null;
+    lastReading: number | null;
+    meterNum: string | null;
+    prvAcNo: string | null;
+    cutOutDate: string | null;
+}

@@ -1,0 +1,117 @@
+<ngx-no-column-layout>
+    
+  <div class="login body" >
+    <div class="bgimg" >   
+      <div fxLayoutAlign="end center" fxFlexFill class="main-div scroll">
+        <mat-card fxFlex="30" fxFlex.gt-lg="26" fxFlex.md="35" fxFlex.sm="47"  fxFlex.xs="100" class="mat-elevation-z8">
+          <mat-card-title fxLayoutAlign="center center">{{title}}</mat-card-title>
+          <form [formGroup]="form" *ngIf="loginFormvisibility" fxLayoutAlign="stretch" fxLayout="column" class="login-form" (ngSubmit)="login()">
+            <div fxLayout="row" fxLayoutAlign="space-around center">
+              <mat-icon class="icon_margin" matSuffix >user_name</mat-icon>
+              <mat-divider vertical class="mat_divider"></mat-divider>
+              <mat-form-field fxFlex="55" appearance="outline">
+                <mat-label>User Name</mat-label>
+                <input matInput placeholder="User Name"  formControlName="userName">
+                <mat-error>Please enter user name </mat-error>
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-around center">
+              <mat-icon class="icon_margin" matSuffix>password</mat-icon>
+              <mat-divider vertical class="mat_divider"></mat-divider>
+              <mat-form-field fxFlex="55" appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" placeholder="Password" formControlName="password">
+                <mat-error>Please enter a password </mat-error>
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-around center" class="forgotButton">
+              <mat-checkbox class="m-top" formControlName="rememberMe">Remember me</mat-checkbox>
+              <mat-divider vertical class="divider-height"></mat-divider>
+              <a mat-button class="forgot-password-button" routerLink="" (click)="showForgotPassForm()">Forgot my password</a>
+            </div>
+            <button fxLayoutAlign="center center" class="login-button" mat-raised-button type="submit" [disabled]="!form.valid" >LOGIN</button>
+          </form>
+          <form [formGroup]="forgotForm" *ngIf="forgotFormvisibility" fxLayoutAlign="stretch" fxLayout="column" class="login-form" (ngSubmit)="GetOtpViaEmail()">
+            <div fxLayout="row" fxLayoutAlign="space-around center">
+              <mat-icon class="icon_margin" matSuffix>email</mat-icon>
+              <mat-divider vertical class="mat_divider"></mat-divider>
+              <mat-form-field fxFlex="80" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Email" autocomplete="off" formControlName="email">
+                <mat-error *ngIf="forgotForm.get('email').hasError('required')">Please enter your email </mat-error>
+                <mat-error *ngIf="forgotForm.get('email').hasError('email')">Please enter your valid email </mat-error>
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px" class="forgot-btn-div">
+              <button mat-button class="cancel-button" routerLink="" (click)="backToLoginForm()">Cancel</button>
+              <button fxLayoutAlign="center center" class="submit-button" mat-raised-button type="submit"
+                [disabled]="!forgotForm.valid" class="submit-button">
+                <div fxLayout="row" fxFlex="100" fxLayoutAlign="center center"> 
+                  Submit <div> 
+                    <span class="padding-left-4" *ngIf="!showRetrieving"></span> 
+                    <mat-spinner *ngIf="showRetrieving" [diameter]="26"></mat-spinner> </div> 
+                </div>
+              </button>
+            </div>
+          </form>
+
+          <form [formGroup]="verifyForm" *ngIf="verifyFormvisibility" fxLayoutAlign="stretch" fxLayout="column" class="login-form" (ngSubmit)="VerifyOtp()">
+            <div fxLayout="row" fxLayoutAlign="space-around center">
+              <mat-icon class="icon_margin" matSuffix>password</mat-icon>
+              <mat-divider vertical class="mat_divider"></mat-divider>
+              <mat-form-field fxFlex="80" appearance="outline">
+                <mat-label>OTP</mat-label>
+                <input matInput placeholder="Please enter OTP" autocomplete="off" formControlName="code">
+                <mat-error>Please enter your OTP </mat-error>
+              </mat-form-field>
+            </div>
+            <span class="otp-time-left">
+              Your OTP lefts : {{displayOtpTimeLeft}}
+            </span>
+            <span *ngIf="otpTimeOut" class="otp-time-out">OTP is expired. <a mat-button (click)="ResendOtpViaEmail()">Try for new.</a></span>
+
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" class="forgot-btn-div">
+              <button mat-button class="cancel-button" routerLink="" (click)="backToLoginForm()">Cancel</button>
+              <button fxLayoutAlign="center center" class="submit-button" mat-raised-button type="submit"
+                [disabled]="!verifyForm.valid" class="submit-button">
+                <div fxLayout="row" fxFlex="100" fxLayoutAlign="center center"> 
+                  Verify <div> 
+                    <span class="padding-left-4" *ngIf="!showRetrieving"></span> 
+                    <mat-spinner *ngIf="showRetrieving" [diameter]="26"></mat-spinner> </div> 
+                </div>
+              </button>
+            </div>
+            <!-- <button fxLayoutAlign="center center" mat-raised-button type="submit"
+            [disabled]="!verifyForm.valid" class="login-button">SEND</button> -->
+          </form>
+
+          <form [formGroup]="changePasswordForm" *ngIf="changePasswordFormvisibility" fxLayoutAlign="stretch" fxLayout="column" class="login-form" (ngSubmit)="ChangePassword()">
+            <div fxLayout="row" fxLayoutAlign="space-around center">
+              <mat-icon class="icon_margin" matSuffix>password</mat-icon>
+              <mat-divider vertical class="mat_divider"></mat-divider>
+              <mat-form-field fxFlex="80" appearance="outline">
+                <mat-label>New Password</mat-label>
+                <input matInput type="password" placeholder="Password" autocomplete="off" formControlName="newPassword">
+                <mat-error>Password is required  </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-around center">
+              <mat-icon class="icon_margin" matSuffix>password</mat-icon>
+              <mat-divider vertical class="mat_divider"></mat-divider>
+              <mat-form-field fxFlex="80" appearance="outline">
+                <mat-label>Confirm Password</mat-label>
+                <input matInput type="password" placeholder="Confirm Password" autocomplete="off" formControlName="confirmPassword">
+                <mat-error *ngIf="changePasswordForm.get('confirmPassword').hasError('required')">Confirm password is required </mat-error>
+                <mat-error *ngIf="changePasswordForm.get('confirmPassword').hasError('mustMatch')">Passwords must match </mat-error>
+              </mat-form-field>
+            </div>
+
+            <button fxLayoutAlign="center center" class="login-button" mat-raised-button type="submit" [disabled]="!changePasswordForm.valid" >RESET</button>
+          </form>
+
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</ngx-no-column-layout>

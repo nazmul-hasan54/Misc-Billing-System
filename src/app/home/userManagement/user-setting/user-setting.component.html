@@ -1,0 +1,25 @@
+<div fxLayout="column" fxLayoutGap="40px" fxLayoutAlign="space-between none">
+    <ngx-generic-header title="User Settings"></ngx-generic-header>
+
+    <mat-card fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start center" fxLayoutGap="20px"
+        fxLayoutAlign.xs="none none" class="form-card">
+        <mat-toolbar fxFlex="30" fxFlex.sm="40" fxFlex.xs="100%" fxLayoutAlign="start center" class="search-toolbar">
+            <mat-icon matPrefix class="search-icon">search</mat-icon>
+            <input matInput type="search" placeholder="search by user name ..." class="search-input" fxFill
+                [(ngModel)]="searchBy">
+        </mat-toolbar>
+        <button mat-button class="search-button" (click)="searchUserByUserName()">Search</button>
+        <button mat-fab class="iconPlus" type="button" (click)="addUser()">
+            <mat-icon>add</mat-icon>
+        </button>
+    </mat-card>
+
+
+    <mat-card class="table-card">
+        <div class="loader-div"><ngx-table-loader [isCompleted]="isLoading"></ngx-table-loader></div>
+        <ngx-custom-table-pagination [dataset]="userSettingData" [columns]="columns"
+            (onPageChange)="pageChangeFromUserTable($event)" [total]="total" (onDialogOpen)="editUser($event)"
+            [currentPage]="currentPage" [pageSize]="pageSize">
+        </ngx-custom-table-pagination>
+    </mat-card>
+</div>

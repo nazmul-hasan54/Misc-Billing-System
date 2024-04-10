@@ -1,0 +1,12 @@
+@import "../../../@theme/styles/themes.scss";
+@import "~@nebular/theme/styles/global/breakpoints";
+@import "~bootstrap/scss/mixins/breakpoints";
+
+@include nb-install-component() {
+    .generic-header {
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 28px;
+        color: nb-theme(color-basic-1100);
+    }
+}

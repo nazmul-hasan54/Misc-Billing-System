@@ -1,0 +1,45 @@
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+input[type="number"]:hover,
+input[type="number"]:focus {
+  -moz-appearance: number-input; /* Firefox */
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  display: none; /* Chrome, Safari */
+  -webkit-appearance: none;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-user-select: none;
+  opacity: 0.5;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+  position: absolute;
+  height: 100%;
+  width: 20%;
+  background-color: transparent;
+  z-index: 1;
+}
+
+input[type=number]::-webkit-outer-spin-button {
+  position: relative;
+  width: 20%;
+  height: 100%;
+  z-index: 0;
+  cursor: pointer;
+  display: block;
+  background-color: transparent;
+}

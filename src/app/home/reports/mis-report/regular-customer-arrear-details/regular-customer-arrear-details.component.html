@@ -1,0 +1,157 @@
+<div class="row">
+    <div class="col-md-12">
+        <form [formGroup]="form" (ngSubmit)="onReport()">
+            <nb-card>
+                <nb-card-header>Arrear Regular Customer</nb-card-header>
+                <nb-card-body>
+                    <div class="row m-1 p-1">
+                        <div class="col-sm-2">
+                            <label class="col-form-label">Center</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <nb-select multiple fullWidth placeholder="Please Select Center" formControlName="centerName" (selectedChange)="onSelect($event)">
+                                <nb-option *ngFor="let item of allCenter" [value]="item.code">{{item.dbName}}</nb-option>
+                            </nb-select>
+                            <div *ngIf="(submitted && form.get('centerName').hasError('required')) || (form.get('centerName').hasError('required') && form.get('centerName').touched)" class="text-danger" padding>
+                                <div>Center is required!</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-1 p-1">
+                        <div class="col-sm-2">
+                            <label class="col-form-label">Location Code</label>
+                        </div>
+                        <div class="col-sm-6">
+                        <nb-select multiple fullWidth placeholder="Please Select Location Code" formControlName="location" (selectedChange)="locationChange($event)">
+                            <nb-option *ngFor="let item of locationData" [value]="item.code">{{item.code}}&nbsp;({{item.name}})</nb-option>
+                        </nb-select>
+                        
+                        </div>
+                    </div>
+                    <div class="row m-1 p-1">
+                        <div class="col-sm-2">
+                            <label class="col-form-label">Bill Month</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input
+                                type="text" fullWidth
+                                formControlName="billMonth"
+                                nbInput
+                                [bsConfig]="{
+                                    minMode: 'month',
+                                    dateInputFormat: 'MMM-YYYY',
+                                    isAnimated: true,
+                                    containerClass: 'theme-default'
+                                }"
+                                #dp="bsDatepicker"
+                                bsDatepicker
+                                (keypress)="space($event)"
+                                placeholder="Enter Bill Month" maxlength="8" />
+                        </div>
+                    </div>
+                    <div class="row m-1 p-1">
+                        <div class="col-sm-2">
+                            <label class="col-form-label">Conn. Status</label>
+                        </div>
+                        <div class="col-sm-6">
+                        <nb-select fullWidth placeholder="Select Conn. Status" formControlName="conStatus">
+                            <nb-option disabled selected></nb-option>
+                           <nb-option *ngFor="let item of connStatus_Value" [value]="item.id">{{item.text}}</nb-option>
+                        </nb-select>
+                        </div>
+                    </div>
+                    <div class="row m-1 p-1">
+                        <div class="col-sm-2">
+                            <label class="col-form-label">Tariff</label>
+                        </div>
+                        <div class="col-sm-6">
+                        <nb-select fullWidth placeholder="Select Tariff" formControlName="tariff" (selectedChange)="locationChange($event)">
+                            <nb-option disabled selected></nb-option>
+                           <nb-option *ngFor="let item of tariff" [value]="item.id">{{item.text}}</nb-option>
+                        </nb-select>
+                        
+                        </div>
+                    </div>
+                    <div class="row m-1 p-1">
+                        <div class="col-sm-2">
+                            <label class="col-form-label">Arrear From (Tk)</label>
+                        </div>
+                        <div class="col-md-6">
+                        <input  type="number" class="no-spin" nbInput fullWidth status="basic" placeholder="" formControlName="arrearFrom">
+                        </div>
+                    </div>
+                    <div class="row m-1 p-1">
+                        <div class="col-sm-2">
+                            <label class="col-form-label">Arrear To (Tk)</label>
+                        </div>
+                        <div class="col-md-6">
+                        <input  type="number" class="no-spin" nbInput fullWidth status="basic" placeholder="" formControlName="arrearTo">
+                        </div>
+                    </div>
+                    <div class="row m-1 p-1">
+                        <div class="col-sm-2">
+                            <label class="col-form-label">Bill Group</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <nb-select fullWidth placeholder="Please select Bill Group" formControlName="billGroup" (selectedChange)="billGroupChange($event)">
+                                <nb-option [value]="'0'">All</nb-option>
+                                <nb-option *ngFor="let item of billGroupList" [value]="item.billGroup">{{item.billGroup}}&nbsp;({{item.dbName}})</nb-option>
+                            </nb-select>
+                            
+                        </div>
+                    </div>
+                    <div class="row m-1 p-1">
+                        <div class="col-sm-2">
+                            <label class="col-form-label">Book</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <nb-select fullWidth placeholder="Please select a Location Book" formControlName="book">
+                                <nb-option [value]="'0'">All</nb-option>
+                                <nb-option *ngFor="let item of locationBookList" [value]="item.bookId">{{item.bookNum}}&nbsp;({{item.dbName}})</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                    <div class="row m-1 p-1">
+                        <div class="col-md-2">
+                            <label for="considerAll" class="col-form-label ">Consider All</label>
+                        </div>
+                        <div class="col-md-6">
+                          <nb-checkbox status="basic"  formControlName="isAll"></nb-checkbox>
+                        </div>
+                    </div>
+                    <div class="row m-1 p-1" *ngIf="form.controls['isAll'].value == false">
+                        <label for="considerAll" class="col-form-label col-md-2">Consider Principal</label>
+                        <div class="col-md-6">
+                          <nb-checkbox status="basic" formControlName="isPrn"></nb-checkbox>
+                        </div>
+                    </div>
+                    <div class="row m-1 p-1"  *ngIf="form.controls['isAll'].value == false">
+                        <label for="considerAll" class="col-form-label col-md-2">Consider Lps</label>
+                        <div class="col-md-6">
+                          <nb-checkbox status="basic" formControlName="isLps"></nb-checkbox>
+                        </div>
+                    </div> 
+                    <div class="row m-1 p-1"  *ngIf="form.controls['isAll'].value == false">
+                        <label for="considerAll" class="col-form-label col-md-2">Consider Vat</label>
+                        <div class="col-md-6">
+                          <nb-checkbox status="basic" formControlName="isVat"></nb-checkbox>
+                        </div>
+                    </div>
+                    <div class="row m-1 p-1">
+                        <div class="col-sm-2">
+                            <label class="col-form-label">Order Type</label>
+                        </div>
+                        <div class="col-sm-6">
+                        <nb-select fullWidth placeholder="" formControlName="orderType">
+                            <nb-option *ngFor="let item of orderTypeList" [value]="item.id">{{item.text}}</nb-option>
+                        </nb-select>
+                        </div>
+                    </div>
+                </nb-card-body>
+                <nb-card-footer>
+                    <button type="submit" nbButton status="success">  Generate Report </button>
+                </nb-card-footer>
+            </nb-card>
+        </form>
+    </div>
+</div>

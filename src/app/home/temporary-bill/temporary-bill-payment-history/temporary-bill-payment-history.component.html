@@ -1,0 +1,108 @@
+
+<nb-card>
+    <nb-card-header class="header-section">Bill & Payment History</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="temporarypaymenthistory">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="locationCode" class="label col-sm-4 col-form-label">Location<span class="text-danger">*</span>
+                            :</label>
+                        <div class="col-sm-8">
+                            <nb-select placeholder="Select Locaton" formControlName="locationCode" fullWidth (selectedChange)="getAllBlockNum($event)">
+                                <nb-option *ngFor="let location of locationList"
+                                    value="{{location.locationCode}}">{{location.locationName}}</nb-option>
+                            </nb-select>
+                        </div>
+            
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="blockNum" class="label col-sm-4 col-form-label">Book Number :</label>
+                        <div class="col-sm-8">
+                            <nb-select placeholder="Select Book No" formControlName="blockNum" fullWidth>
+                                <nb-option *ngFor="let block of blockNumList"
+                                    value="{{block.blockNum}}">{{block.blockNum}}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                        <div class="form-group row">
+                            <label for="billMonth" class="label col-sm-4 col-form-label"> Bill Month<span class="text-danger">*</span> :</label>
+                            <div class="col-sm-8">
+                                <nb-select placeholder="Select BillMonth" formControlName="billMonth" fullWidth>
+                                    <nb-option *ngFor="let billmonth of billMonthList" value="{{billmonth.billCycleCode}}">{{billmonth.billCycleCode}}</nb-option>
+                                </nb-select>
+                            </div>
+                        
+                        </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group row">
+                    <label for="cusomerNumber" class="label col-sm-4 col-form-label">CustomerNumber :</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" formControlName="consumerNumber" >
+                    </div>
+                </div>
+                </div>
+            </div>
+           
+           <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-8">
+                        <button class=" btn btn-success px-5">Search</button>
+                    </div>
+            
+                </div>
+            </div>
+           </div>
+
+           <div class="row">
+            <table class="table table-bordered table-responsive">
+                <thead>
+                    <tr>
+                        <th>consumer Number</th>
+                        <th>Bill No.</th>
+                        <th>Cd</th>
+                        <th>Meter Con.</th>
+                        <th>Reading</th>
+                        <th>consumption(kwh)</th>
+                        <th>Current Bill with Vat & Lps</th>
+                        <th>Arrear Bill with Vat & Lps</th>
+                        <th>Total Bill</th>
+                        <th>Last Payment Date</th>
+                        <th>Paid Amount(Tk)</th>
+                        <th>Pay Date</th>
+                        <th>Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                </tbody>
+            </table>
+           </div>
+                   
+        </form>
+    </nb-card-body>
+</nb-card>

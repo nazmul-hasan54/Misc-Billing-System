@@ -1,0 +1,186 @@
+<nb-card>
+    <nb-card-header class="header-section">Untraced Consumer</nb-card-header>
+    
+    <nb-card-body>
+      
+      
+      <h2 class="form-header-section">Customer Information</h2>
+
+      <hr class="hr-vertical">
+      
+      <form [formGroup]="untracedConsumerForm">
+      <div class="row" *ngIf="roleName == 'Admin'">
+        <div class="col-sm-6">
+          <div class="form-group row">
+            <label for="customerType" class="label col-sm-4 col-form-label">Location <span class="text-danger">*</span> :</label>
+            <div class="col-sm-8">
+              <nb-select formControlName="locationCode"  fullWidth placeholder="Select Location" (selectedChange)="getDbByLocation($event)">
+                <nb-option *ngFor="let item of locationFormSession" [value]="item.code"> {{item.name}}</nb-option>
+            </nb-select>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group row">
+                <label for="customerType" class="label col-sm-4 col-form-label">Customer Number<span class="text-danger">*</span> :</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control"  formControlName="customerNumber" (keydown)="getcustomerDetails($event)"fullWidth placeholder="Customer Number" onkeypress="return /[0-9]/i.test(event.key)" maxlength="8">
+                  <div *ngIf="f.customerNumber.touched && f.customerNumber.invalid" class="alert alert-danger">
+                    <div *ngIf="f.customerNumber.errors?.required">Please enter Customer number</div>
+                    <div *ngIf="f.customerNumber.errors?.pattern">Customer number must be 8 digit</div>   
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="roleName != 'Admin'">
+        <div class="col-sm-6">
+            <div class="form-group row">
+                <label for="customerType" class="label col-sm-4 col-form-label">Customer Number<span class="text-danger">*</span> :</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control"  formControlName="customerNumber" (keydown)="getcustomerDetails($event)"fullWidth placeholder="Customer Number" onkeypress="return /[0-9]/i.test(event.key)" maxlength="8">
+                  <div *ngIf="f.customerNumber.touched && f.customerNumber.invalid" class="alert alert-danger">
+                    <div *ngIf="f.customerNumber.errors?.required">Please enter Customer number</div>
+                    <div *ngIf="f.customerNumber.errors?.pattern">Customer number must be 8 digit</div>   
+                  </div>
+                </div>
+              </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group row">
+            <label for="customerType" class="label col-sm-4 col-form-label">Location <span class="text-danger">*</span> :</label>
+            <div class="col-sm-8">
+              <!-- <nb-select formControlName="locationCode"  fullWidth placeholder="Select Location">
+                <nb-option *ngFor="let item of locationFormSession" [value]="item.code">{{item.name}}</nb-option>
+            </nb-select> -->
+              <input type="text" class="form-control no-border" formControlName="locationCode" readonly  placeholder="Location">
+            </div>
+          </div>
+        </div>
+
+        
+      </div>
+
+
+      <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group row">
+                <label for="customerType" class="label col-sm-4 col-form-label">Name :</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control no-border" formControlName="customerName" readonly  placeholder=" Customer Name">
+                </div>
+              </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group row">
+            <label for="customerType" class="label col-sm-4 col-form-label">Address :</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control no-border" formControlName="customerAddr" readonly  placeholder="Address">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group row">
+                <label for="customerType" class="label col-sm-4 col-form-label">Tariff :</label>
+                <div class="col-sm-8">
+                  <input type="text" formControlName="tariffDesc" class="form-control no-border" readonly  placeholder=" Tariff">
+                </div>
+              </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group row">
+            <label for="customerType" class="label col-sm-4 col-form-label">Business Type :</label>
+            <div class="col-sm-8">
+              <input type="text" formControlName="businessType"  class="form-control no-border" readonly  placeholder="Business Type ">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group row">
+                <label for="customerType" class="label col-sm-4 col-form-label">Prev. Acc Number  :</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control no-border" formControlName="prvAcNo" readonly  placeholder=" Prev. Acc Number">
+                </div>
+              </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group row">
+            <label for="customerType" class="label col-sm-4 col-form-label">Area Code :</label>
+            <div class="col-sm-8">
+              <input type="text" formControlName="areaCode" class="form-control no-border" readonly  placeholder="Area Code">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+      <h2 class="form-header-section">Meter Information</h2>
+
+      <hr class="hr-vertical">
+
+      <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group row">
+                <label for="customerType" class="label col-sm-4 col-form-label">Meter Type :</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control no-border" formControlName="meterTypeDesc" readonly  placeholder=" Meter Type">
+                </div>
+              </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group row">
+            <label for="customerType" class="label col-sm-4 col-form-label">Meter Number :</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control no-border" formControlName="meterNum" readonly  placeholder="Meter Number ">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group row">
+                <label for="customerType" class="label col-sm-4 col-form-label">Meter Condition :</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control no-border" formControlName="meterConditionDesc" readonly  placeholder=" Meter Condition">
+                </div>
+              </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group row">
+            <label for="customerType" class="label col-sm-4 col-form-label">Customer Type<span class="text-danger">*</span> :</label>
+            <div class="col-sm-8">
+              <nb-select placeholder="Select UC Type" formControlName="ucType" fullWidth>
+                <nb-option *ngFor="let type of dcTypeList" value="{{type.dcTypeCode}}">{{type.dcTypeDesc}}</nb-option>
+              </nb-select>
+              <div *ngIf="f.ucType.touched && f.ucType.invalid" class="alert alert-danger">
+                <div *ngIf="f.ucType.errors?.required">Please Enter UC Type</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </form>
+      <div class="row">
+        <div class="col-sm-2">
+          <button nbButton fullWidth status="primary" (click)="untracedConsumerSave()">  Save </button>
+          
+        </div>
+
+        <div class="col-sm-2">
+          <button  nbButton fullWidth status="warning" (click)="reset()">  Refresh </button>
+        </div>
+
+      </div>
+    </nb-card-body>
+  </nb-card>

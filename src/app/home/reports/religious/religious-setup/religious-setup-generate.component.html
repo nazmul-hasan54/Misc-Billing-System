@@ -1,0 +1,54 @@
+<nb-card >
+    <nb-card-header>Religious Setup</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="religiousSetupForm" (ngSubmit)="onSubmit()">
+            <div class="row m-1 p-1">
+                <label for="fromMonth" class="col-form-label col-md-2">From Month</label>
+                <div class="col-md-6">
+                    <input 
+                    type="text" fullWidth
+                    formControlName="fromMonth"
+                    nbInput
+                    [bsConfig]="{
+                    minMode: 'month',
+                    dateInputFormat: 'MMM-YYYY',
+                    isAnimated: true,
+                    containerClass: 'theme-default'
+                    }"
+                    #dp="bsDatepicker"
+                    bsDatepicker
+                    (keypress)="space($event)"
+                    placeholder="Enter Bill Month" maxlength="8"/>
+                </div>
+            </div>
+
+            <div class="row m-1 p-1">
+                <label for="toMonth" class="col-form-label col-md-2">To Month</label>
+                <div class="col-md-6">
+                    <input 
+                    type="text" fullWidth
+                    formControlName="toMonth"
+                    nbInput
+                    [bsConfig]="{
+                    minMode: 'month',
+                    dateInputFormat: 'MMM-YYYY',
+                    isAnimated: true,
+                    containerClass: 'theme-default'
+                    }"
+                    #dp="bsDatepicker"
+                    bsDatepicker
+                    (keypress)="space($event)"
+                    placeholder="Enter Bill Month" maxlength="8"/>
+                </div>
+            </div>
+            <div class="row mt-3 ml-2">
+                <div class="col-md-6 offset-2 ">
+                    <button nbButton type="submit" status="success">Save</button>
+                </div>
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>
+
+
+

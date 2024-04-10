@@ -1,0 +1,141 @@
+<nb-card>
+    <nb-card-header class="header-section">Bill Payment</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="billpaymentform">
+           
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="cusomerNumber" class="label col-sm-4 col-form-label">Consumer Number<span class="text-danger">*</span> :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" formControlName="consumerNumber">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="billNumber" class="label col-sm-4 col-form-label"> Bill Number<span
+                                class="text-danger">*</span> :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" formControlName="billNumber">
+
+                            <!-- <nb-select placeholder="Select Bill Number" formControlName="billNumber" fullWidth>
+                                <nb-option *ngFor="let billnumber of billNumberList"
+                                    value="{{billnumber.value}}">{{billnumber.value}}</nb-option>
+                            </nb-select> -->
+                        </div>
+
+                    </div>
+                </div>
+                
+            </div>
+
+           
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <div class="col-sm-4"></div>
+                        <div class="col-sm-8">
+                            <button class=" btn btn-success px-5" (click)="getbillDetailsByBillNumbr()">Search</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="consumerName" class="label col-sm-4 col-form-label ">Consumer Name :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control no-border" formControlName="customerName" readonly>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="locationDescription" class="label col-sm-4 col-form-label "> location Description:</label>
+                        <div class="col-sm-8">   
+                                <input type="text" class="form-control no-border" formControlName="locationName" readonly> 
+                        </div>
+            
+                    </div>
+                </div>
+            
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="locationCode" class="label col-sm-4 col-form-label ">Location Code :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control no-border" formControlName="locationCode" readonly>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="areaCode" class="label col-sm-4 col-form-label "> Area Code:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control no-border" formControlName="areaCode" readonly>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="totalBill" class="label col-sm-4 col-form-label">Total Bill :</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control no-border" formControlName="totalAmount" readonly>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="principleAmount" class="label col-sm-4 col-form-label ">Principle Amount:</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control no-border" formControlName="principleAmount" readonly>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label for="vatAmount" class="label col-sm-4 col-form-label ">Vat Amount :</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control no-border" formControlName="vatAmount" readonly>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <div class="col-sm-4">
+                            <button class=" btn btn-warning px-5" (click)="paymnetGateway($event)">Pay Now</button>
+                        </div>
+                        <div class="col-sm-8">
+                            
+                        </div>
+            
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </nb-card-body>
+</nb-card>

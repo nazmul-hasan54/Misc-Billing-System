@@ -1,0 +1,136 @@
+<div class="row" *ngIf="isTrue==false">
+    <div class="col-md-12">
+        <form [formGroup]="ministryArrearForm" (ngSubmit)="onReport()">
+            <nb-card>
+                <nb-card-header>Total  Ministry </nb-card-header>
+                <nb-card-body>
+                    <div *ngIf="this.roleName=='Admin'">
+                        <div class="row m-1 p-1">
+                            <div class="col-sm-2">
+                                <label class="col-form-label">Zone</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <nb-select fullWidth placeholder="Please Select Center" formControlName="zoneCode"
+                                    (selectedChange)="onChangeSelectedCircle($event)">
+                                    <nb-option [value]="'0'">All</nb-option>
+                                    <nb-option *ngFor="let item of zoneList" [value]="item.code">{{item.name}}</nb-option>
+                                </nb-select>
+                            </div>
+                        </div>
+                        <div class="row m-1 p-1" *ngIf="this.formVal.zoneCode !='0'">
+                            <div class="col-sm-2">
+                                <label class="col-form-label">Circle</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <nb-select fullWidth placeholder="Please Select Center" formControlName="circleCode"
+                                    (selectedChange)="onChangeSelectedLocation($event)">
+                                    <nb-option [value]="'0'">All</nb-option>
+                                    <nb-option *ngFor="let item of zoneWiseCircle"
+                                        [value]="item.code">{{item.name}}</nb-option>
+                                </nb-select>
+                            </div>
+                        </div>
+    
+                        <div class="row m-1 p-1" *ngIf="this.formVal.circleCode != '0'">
+                            <div class="col-sm-2">
+                                <label class="col-form-label">Location</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <nb-select fullWidth placeholder="Please Select Center" formControlName="locationCode">
+                                    <nb-option [value]="'0'">All</nb-option>
+                                    <nb-option *ngFor="let item of circleWiseLocation" [value]="item.code">{{item.code}} -
+                                        {{item.name}}</nb-option>
+                                </nb-select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div *ngIf="this.roleName!='Admin'">
+                        <div class="row m-1 p-1">
+                            <div class="col-sm-2">
+                                <label class="col-form-label">Zone</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <nb-select fullWidth placeholder="Please Select Center" formControlName="zoneCode"(selectedChange)="getCircleByUserNameZoneCode($event)">
+                                    <nb-option *ngFor="let item of zoneByUserList" [value]="item.code">{{item.name}}</nb-option>
+                                </nb-select>
+                            </div>
+                        </div>
+                        <div class="row m-1 p-1" *ngIf="this.formVal.zoneCode !='0'">
+                            <div class="col-sm-2">
+                                <label class="col-form-label">Circle</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <nb-select fullWidth placeholder="Please Select Center" formControlName="circleCode"(selectedChange)="getLocationByUserNameCircleCodes($event)">
+                                    <nb-option *ngFor="let item of circleByUserZoneList"[value]="item.code">{{item.name}}</nb-option>
+                                </nb-select>
+                            </div>
+                        </div>
+    
+                        <div class="row m-1 p-1" *ngIf="this.formVal.circleCode != '0'">
+                            <div class="col-sm-2">
+                                <label class="col-form-label">Location</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <nb-select fullWidth placeholder="Please Select Center" formControlName="locationCode">
+                                    <nb-option *ngFor="let item of locationByUserCircleList" [value]="item.code">{{item.code !='0' ?  '('+item.code+') -' : ""}} {{item.name}}</nb-option>
+                                </nb-select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row m-1 p-1">
+                        <div class="col-sm-2">
+                            <label for="billMonth" class="col-form-label">Bill Month</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <!-- <input nbInput placeholder="Pick a date" [nbDatepicker]="dateTimePicker" format="dd.MM.yyyy"
+                                fullWidth formControlName="reportDate">
+                            <nb-datepicker #dateTimePicker></nb-datepicker>
+                            <div *ngIf="(submitted  &&  ministryArrearForm.get('reportDate').hasError('required'))  || ( ministryArrearForm.get('reportDate').hasError('required') && ministryArrearForm.get('reportDate').touched)"
+                                class="text-danger" padding>
+                                <div>Please Enter Report Date</div>
+                            </div> -->
+                            
+                                <input 
+                                    type="text" fullWidth
+                                    formControlName="billMonth"
+                                    nbInput
+                                    [bsConfig]="{
+                                    minMode: 'month',
+                                    dateInputFormat: 'MMM-YYYY',
+                                    isAnimated: true,
+                                    containerClass: 'theme-default'
+                                    }"
+                                    #dp="bsDatepicker"
+                                    bsDatepicker
+                                    (keypress)="space($event)"
+                                    placeholder="Enter Bill Month" maxlength="8"/>
+                            
+                        </div>
+                    </div>
+                </nb-card-body>
+                <nb-card-footer>
+                    <button *ngIf="this.isProgress == false" type="submit" nbButton status="success"> Generate Report
+                    </button>
+                    <button *ngIf="this.isProgress" type="submit" nbButton status="success" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Generating...
+                    </button>
+                </nb-card-footer>
+            </nb-card>
+        </form>
+    </div>
+</div>
+<div *ngIf="isTrue==true && report !=''">
+    <div class="row">
+        <div class="col-sm-12 d-flex justify-content-end pb-2">
+            <nb-select placeholder="Export Type" (selectedChange)="onChangeExportType($event)">
+                <nb-option *ngFor="let exportType of exportTypeList"
+                    [value]="exportType.id">{{exportType.name}}</nb-option>
+            </nb-select> &nbsp;
+            <button type="submit" nbButton status="info" (click)="onSearchAgain()">Search Again </button>
+        </div>
+    </div>
+    <ngx-pdf-viewer [report]="report" [documentTitle]="documentTitle"></ngx-pdf-viewer>
+</div>

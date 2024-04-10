@@ -1,0 +1,388 @@
+<nb-card>
+    <nb-card-header class="header-section">New Census</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="temporarybillform">
+        <h2 class="form-header-section">Master Information</h2>
+        <hr class="hr-vertical">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <label for="location" class="label col-sm-4 col-form-label">Location<span
+                        class="text-danger">*</span> :</label>
+                    <div class="col-sm-8">
+                    <nb-select *ngIf="this.roleName == 'Admin'" [placeholder]="'--Select Location--'" formControlName="locationCode" fullWidth (selectedChange)="getAllBlockNum($event)">
+                        <nb-option *ngFor="let location of locationListDd"
+                            value="{{location.locationCode}}">{{location.locationCode}} - {{location.locationDescription}}</nb-option>
+                    </nb-select>
+                    <nb-select *ngIf="this.roleName != 'Admin'" [placeholder]="'--Select Location--'" formControlName="locationCode" fullWidth (selectedChange)="getAllBlockNum($event)">
+                        <nb-option *ngFor="let location of locationList"
+                            value="{{location.locationCode}}">{{location.locationCode}} - {{location.locationName}}</nb-option>
+                    </nb-select>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group row">
+                <label for="bookNumber" class="label col-sm-4 col-form-label">Book Number<span
+                    class="text-danger">*</span> :</label>
+                <div class="col-sm-8">
+                    <nb-select placeholder="Select Block Number" formControlName="blcokNumber" fullWidth (selectedChange)="getAllBillGroup($event)" >
+                        <nb-option *ngFor="let Block of Blocklist" value="{{Block.blockNum}}">{{Block.blockNum}}</nb-option>
+                    </nb-select>
+                </div>
+
+            </div>
+        </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <label for="billGroup" class="label col-sm-4 col-form-label">BillGroup:</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control no-border " formControlName="billGroup" fullWidth placeholder="Bill Group" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+            <div class="form-group row">
+                <label for="oldAcNo" class="label col-sm-4 col-form-label">Old A/C NO:</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" formControlName="oldAcNo" fullWidth placeholder="Old A/C NO">
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <label for="walkOrder" class="label col-sm-4 col-form-label">Walk Order(4 digit)<span
+                        class="text-danger">*</span> :</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" formControlName="walkOrder" fullWidth placeholder="Walk Order" maxlength="4" onkeypress="return /[0-9]/i.test(event.key)">
+                        <div *ngIf="f.walkOrder.touched && f.walkOrder.invalid" class="alert alert-danger">
+                            <div *ngIf="f.walkOrder.errors?.pattern">Walk Order  must be 4 digit</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2 class="form-header-section">Customer Information</h2>
+        <hr class="hr-vertical">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <label for="customerName" class="label col-sm-4 col-form-label">CustomerName<span
+                        class="text-danger">*</span> :</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" formControlName="customerName" fullWidth
+                            placeholder="Customer Name">
+                        <div *ngIf="f.customerName.touched && f.customerName.invalid" class="alert alert-danger">
+                            <div *ngIf="f.customerName.errors?.required">Please enter Customer Name.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <label for="fatherName" class="label col-sm-4 col-form-label">Father's Name / Husband Name:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" formControlName="fatherName"  placeholder="Father's Name/Husband Name">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <label for="address" class="label col-sm-4 col-form-label">Address:</label>
+                    <div class="col-sm-8">
+                        <textarea type="" class="form-control" formControlName="address"  fullWidth
+                            placeholder="Address"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <label for="nidNUmber" class="label col-sm-4 col-form-label">NID NUMBER<span
+                        class="text-danger">*</span> :</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control nidNUmber" formControlName="nidNUmber" fullWidth
+                            placeholder="NID NUMBER" maxlength="16" minlength="10" onkeypress="return /[0-9]/i.test(event.key)">
+                            <div *ngIf="f.nidNUmber.touched && f.nidNUmber.invalid" class="alert alert-danger">
+                                <div *ngIf="f.nidNUmber.errors">Please enter NID number between 10 to 16 digit </div>
+                              </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <label for="mobileNumber" class="label col-sm-4 col-form-label">Mobile Number<span
+                        class="text-danger">*</span> :</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control mobileNumber" formControlName="mobileNumber" fullWidth placeholder="Mobile Number"  maxlength="11" onkeypress="return /[0-9]/i.test(event.key)">
+                        <div *ngIf="f.mobileNumber.touched && f.mobileNumber.invalid" class="alert alert-danger">
+                            <div *ngIf="f.mobileNumber.errors">Mobile number Must be  11 digit .</div>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="form-header-section">Meter Information</h2>
+        <hr class="hr-vertical">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <label for="meterOwner" class="label col-sm-4 col-form-label">Meter Owner<span class="text-danger">*</span>:</label>
+                    <div class="col-sm-8">
+                        <nb-select placeholder="Select Meter Owner" formControlName="meterOwner" fullWidth>
+                            <nb-option *ngFor="let owner of meterOwnerList"
+                                value="{{owner.meterOwnerCode}}">{{owner.meterOwnerDesc}}</nb-option>
+                        </nb-select>
+                        <div *ngIf="f.meterOwner.touched && f.meterOwner.invalid" class="alert alert-danger">
+                            <div *ngIf="f.meterOwner.errors?.required">Please Enter Meter Owner</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <label for="meterType" class="label col-sm-4 col-form-label">Meter Type<span class="text-danger">*</span>:</label>
+                    <div class="col-sm-8">
+                        <nb-select placeholder="Select Meter Type" formControlName="meterType" fullWidth  (selectedChange)="changeInitialReading($event)">
+                            <nb-option *ngFor="let meterType of meterTypeList" value="{{meterType.meterTypeCode}}">{{meterType.meterTypeDesc}}</nb-option>
+                        </nb-select>
+                        <div *ngIf="f.meterType.touched && f.meterType.invalid" class="alert alert-danger">
+                            <div *ngIf="f.meterType.errors?.required">Please Enter Meter Type</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <label for="meterNumber" class="label col-sm-4 col-form-label">Meter Number<span class="text-danger">*</span>:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" formControlName="meterNumber" placeholder="Meter Number" maxlength="9" onkeypress="return /[0-9]/i.test(event.key)">
+                        <div *ngIf="f.meterNumber.touched && f.meterNumber.invalid" class="alert alert-danger">
+                            <div *ngIf="f.meterNumber.errors?.required">Please Enter Meter Number</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <label for="meterDigit" class="label col-sm-4 col-form-label">Meter Digit<span class="text-danger">*</span>:</label>
+                    <div class="col-sm-8">
+                            <input type="text" class="form-control mobileNumber" formControlName="meterDigit" fullWidth
+                                placeholder="Meter Digit" onkeypress="return /[0-9]/i.test(event.key)">
+                                <div *ngIf="f.meterDigit.touched && f.meterDigit.invalid" class="alert alert-danger">
+                                    <div *ngIf="f.meterDigit.errors?.required">Please Enter Meter Digit</div>
+                                </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <label for="meterCondition" class="label col-sm-4 col-form-label">Meter Condition<span class="text-danger">*</span>:</label>
+                    <div class="col-sm-8">
+                        <nb-select placeholder="Select Meter Condition" formControlName="meterCondition" fullWidth>
+                            <nb-option *ngFor="let condition of meterConsitionList"
+                                value="{{condition.defectiveCode}}">{{condition.defectiveDesc}}</nb-option>
+                        </nb-select>
+                        <div *ngIf="f.meterCondition.touched && f.meterCondition.invalid" class="alert alert-danger">
+                            <div *ngIf="f.meterCondition.errors?.required">Please Enter Meter Condition</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <label for="omf" class="label col-sm-4 col-form-label">OMF:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" formControlName="omf" fullWidth
+                            placeholder="OMF" onkeypress="return /[0-9]/i.test(event.key)"  >
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-4"></div>
+           <div class="col-sm-8">
+            <button class="btn btn-primary mb-2" (click)="getInitialReading()">Initial Reading</button>
+            
+           </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <table class="table table-bordered tbl">
+                <thead>
+                    <tr class="thead">
+                        <th>TOD</th>
+                        <th>Time Cycle</th>
+                        <th>Reading Type</th>
+                        <th>Reading</th>
+                        <th>Reading Date</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of initReadingFormArray.controls;" [formGroup]="item" >
+                        <td>
+                            <input type="text" class="form-control no-border" formControlName="todDesc" readonly>
+                        </td>
+                        <td >
+                            <input type="text" class="form-control no-border" formControlName="timeCycleDesc" readonly>
+                        </td>
+                        <td >
+                            <input type="text" class="form-control no-border" formControlName="readingTypeDesc" readonly>
+                        </td>
+                        <td >
+                            <input type="number" class="form-control no-border"  formControlName="reading">
+                        </td>
+                        <td >
+                            <input nbInput  formControlName="readingDate" format="dd.MM.yyyy"  fullWidth [nbDatepicker]="formpicker">
+                            <nb-datepicker #formpicker  ></nb-datepicker>
+                        </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+        <h2 class="form-header-section">Connection Details</h2>
+        <hr class="hr-vertical">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <label for="tarrif" class="label col-sm-4 col-form-label">Tarrif<span class="text-danger">*</span> :</label>
+                    <div class="col-sm-8">
+                        <nb-select placeholder="Select Tarrif" formControlName="tarrif" fullWidth>
+                            <nb-option *ngFor="let tarrif of tariffList" value="{{tarrif.tariff}}">{{tarrif.tariff}}</nb-option>
+                        </nb-select>
+                        <div *ngIf="f.tarrif.touched && f.tarrif.invalid" class="alert alert-danger">
+                            <div *ngIf="f.tarrif.errors?.required">Please Enter Tarrif</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <label for="sanctionLoad" class="label col-sm-4 col-form-label">Sanction Load<span class="text-danger">*</span> :</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control mobileNumber" formControlName="sanctionLoad" fullWidth
+                            placeholder="Sanction Load"  onkeypress="return /[0-9]/i.test(event.key)">
+                            <div *ngIf="f.sanctionLoad.touched && f.sanctionLoad.invalid" class="alert alert-danger">
+                                <div *ngIf="f.sanctionLoad.errors?.required">Please Enter Sanction Load</div>
+                            </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <label for="connectedLoad" class="label col-sm-4 col-form-label">Connected Load<span class="text-danger">*</span> :</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" type="text" formControlName="connectedLoad"  placeholder=" Connected Load"  onkeypress="return /[0-9]/i.test(event.key)" >
+                        <div *ngIf="f.connectedLoad.touched && f.connectedLoad.invalid" class="alert alert-danger">
+                            <div *ngIf="f.connectedLoad.errors?.required">Please Enter Connected Load</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <label for="monthlyConsumption" class="label col-sm-4 col-form-label">Monthly Likely Consumption:</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" formControlName="monthlyConsumption"
+                            placeholder="Monthly Consumption">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <label for="businessType" class="label col-sm-4 col-form-label">Type of Business<span class="text-danger">*</span> :</label>
+                    <div class="col-sm-8">
+                        <nb-select placeholder="Select Business Type" formControlName="businessType" fullWidth>
+                            <nb-option *ngFor="let businesstype of businessTypeList"
+                                value="{{businesstype.busTypeCode}}">{{businesstype.busTypeDesc}}</nb-option>
+                        </nb-select>
+                        <div *ngIf="f.businessType.touched && f.businessType.invalid" class="alert alert-danger">
+                            <div *ngIf="f.businessType.errors?.required">Please Enter Business Type</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <label for="formerNumber" class="label col-sm-4 col-form-label">X Former Number:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" formControlName="formerNumber" fullWidth placeholder="X Former Number">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <label for="formerCapacity" class="label col-sm-4 col-form-label">X Former Capacity:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" formControlName="formerCapacity" fullWidth placeholder="X Former Capacity">
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <label for="feeder" class="label col-sm-4 col-form-label">Feeder:</label>
+                    <div class="col-sm-8">
+                        <nb-select formControlName="feederdesc" placeholder="select Feeder" fullWidth>
+                         <nb-option *ngFor="let feeder of feederList" value="{{feeder.feederNo}}">{{feeder.descr}}</nb-option>
+                        </nb-select>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-8">
+                    <button class=" btn btnsave" (click)="save()">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+    </nb-card-body>
+
+</nb-card>
+
+

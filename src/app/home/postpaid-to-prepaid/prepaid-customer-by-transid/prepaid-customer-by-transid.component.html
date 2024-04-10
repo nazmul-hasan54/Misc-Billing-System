@@ -1,0 +1,47 @@
+<!-- <nb-card *ngIf="isTrue==false"> -->
+<nb-card *ngIf="isTrue==false">
+    <nb-card-header class="header-section">Prepaid Customer Report</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="prepaidCustform" (ngSubmit)="onReport()">
+      <div class="row">
+        <div class="col-sm-12">
+            
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <label for="customerType" class="label col-sm-4 col-form-label">Transaction No : </label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" formControlName="transID" fullWidth placeholder="Transaction No">
+                        <div *ngIf="f.transID.touched && f.transID.invalid" class="alert alert-danger">
+                            <div *ngIf="f.transID.errors?.required">Please Enter Transaction No</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="buttons-row">
+        <button *ngIf="isProgress==false" type="submit" nbButton status="success">  Generate Report </button>
+          <button *ngIf="isProgress" type="submit" nbButton status="success" disabled>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Generating...
+          </button>
+      </div>
+    </form>
+    </nb-card-body>
+  </nb-card>
+  
+  <div *ngIf="isTrue==true && report !=''">
+    <div class="row" >
+      <div class="col-sm-12 d-flex justify-content-end pb-2">
+        <!-- <nb-select placeholder="Export Type" (selectedChange)="onChangeExportType($event)">
+          <nb-option *ngFor="let exportType of exportTypeList" [value]="exportType.id">{{exportType.name}}</nb-option>
+        </nb-select> &nbsp; -->
+        <button type="submit" nbButton status="info" (click)="onSearchAgain()"> </button>
+        
+      </div> 
+    </div>
+    <ngx-pdf-viewer [report]="report" [documentTitle]="documentTitle"></ngx-pdf-viewer>
+  </div>
+  
+  
+  
